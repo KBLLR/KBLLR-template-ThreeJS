@@ -1,0 +1,201 @@
+
+#canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#canvas-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+:root {
+  --tp-base-background-color: hsla(0, 0%, 100%, 0.6);
+  --tp-container-background-color: hsla(0, 0%, 3%, 0.4);
+  --tp-base-shadow-color: hsla(0, 0%, 100%, 0);
+  --tp-button-background-color: hsla(264, 5%, 18%, 0.8);
+  --tp-button-background-color-active: hsla(269.25, 93.75%, 43.75%, 0.5);
+  --tp-button-background-color-focus: hsla(359, 6.25%, 6.25%, 0.5);
+  --tp-button-background-color-hover: hsla(0, 0%, 100%, 0.5);
+  --tp-button-foreground-color: hsla(0, 1%, 46%, 0.9);
+  --tp-container-background-color-active: rgba(38, 38, 38, 0.20);
+  --tp-container-background-color-focus: rgba(26, 26, 26, 0.20);
+  --tp-container-background-color-hover: rgba(13, 13, 13, 0.20);
+  --tp-container-foreground-color: rgb(105, 108, 106);
+  --tp-groove-foreground-color: rgb(238, 238, 238);
+  --tp-input-background-color: hsla(0, 0%, 0%, 0.50);
+  --tp-input-background-color-active: hsla(0, 0%, 0%, 0.50);
+  --tp-input-background-color-focus: hsla(0, 0%, 10%, 0.50);
+  --tp-input-background-color-hover: hsla(137, 100%, 99%, 0.8);
+  --tp-input-foreground-color: rgb(255, 255, 255);
+  --tp-label-foreground-color: rgb(17, 16, 16);
+  --tp-monitor-background-color: hsla(0, 74%, 51%, 0.5);
+  --tp-monitor-foreground-color: hsla(0, 0%, 100%, 0.50);
+
+  --white: color: hsla(0, 0%, 100%, 0.6)
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+html,
+body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: auto;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+  @media screen and (min-width: 480px) {
+    font-size: 18px;
+  }
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
+  @media screen and (min-width: 1024px) {
+    font-size: 20px;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 22px;
+  }
+}
+
+
+body {
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.ui {
+  position: fixed;
+  z-index: 100000;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.ui-logo {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: 1rem !important;
+  user-select: none;
+  text-transform: uppercase;
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+#ui-title {
+  font-family: thunder2, "Thunder2", thunder, sofia-pro, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Helvetica, "Open Sans", Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: .05em;
+  color: hsla(0, 0%, 100%, 1);
+  mix-blend-mode: difference;
+
+  margin-bottom: 0 !important;
+  width: 100% !important;
+  max-width: 80% !important;
+
+  user-select: none;
+  text-align: center;
+  margin: 0 auto !important;
+
+  text-transform: uppercase;
+  @media screen and (min-width: 768px) {
+    font-size: 6rem;
+  }
+}
+
+#result-element {
+  /* z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-align: center;
+  color: hsla(0, 0%, 100%, 0.6);
+  font-size: 1em;
+  user-select: none;
+  pointer-events: none;
+}
+
+.tp {
+  z-index: 1000;
+  display: flex;
+  flex-flow: row nowrap;
+  /* gap: 8px; */
+  /* position: absolute; */
+  left: 0;
+}
+
+.tp2 {
+  z-index: 1100;
+  width: 88%;
+  display: flex;
+  align-content: center; 
+  flex-flow: row;
+  position: absolute; 
+}
+
+#debugger {
+  bottom: 2%;
+  max-height: 100%;
+  mix-blend-mode: normal;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+.data-layout-C {
+  position: fixed;
+  z-index: 190;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.data-layout-R {
+  position: fixed;
+  z-index: 190;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-rows: repeat(6, 1fr);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* .column, .row {
+  border: 0.1px solid white;
+} */
+
+#debug {
+  text-align: center;
+}
