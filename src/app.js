@@ -19,39 +19,45 @@ function getRandomCategory() {
   console.log(hemiLightColors[categories[randomIndex]])
   return categories[randomIndex]
 }
-
 const hemiLightCategory = getRandomCategory();
 
-const anisotropyLevel = 16;
+//---------- LIGHT / CUBEMAP TEXTURES
 
-//==GEOMETRIES DATA
+const loader = new THREE.TextureLoader().setPath( 'textures/' )
 
-const geoPARAMS = {
-  sphereData : {
-    radius: 1,
-    widthSegments: 80,
-    heightSegments: 80,
-    phiStart: 0,
-    phiLength: Math.PI * 2,
-    thetaStart: 0,
-    thetaLength: Math.PI * 2,
-  },
-  torusData : {
-    radius: 1,
-    tube: 0.1,
-    tubularSegments: 200,
-    radialSegments: 30,
-    arc: 6.283,
-  },
-  torusKnotData : {
-    radius: 1,
-    tube: 0.1,
-    tubularSegments: 300,
-    radialSegments: 20,
-    p: 1,
-    q: 3,
-  }
-}
+const cubeTextureLoader = new THREE.TextureLoader().setPath('src/assets/cubeMaps/')
+const cubeMaps = [
+  'px.png',
+  'nx.png',
+  'py.png',
+  'ny.png',
+  'pz.png',
+  'nz.png'
+]
+const cubeTexture = cubeTextureLoader.load(cubeMaps)
+cubeTexture.format = THREE.RGBAFormat
+const cubeMap = cubeTexture.mapping = THREE.CubeReflectionMapping
+
+
+// const filenames = [ 'disturb.jpg', 'colors.png', 'uv_grid_opengl.jpg' ];
+
+// const textures = { none: null };
+
+// for ( let i = 0; i < filenames.length; i ++ ) {
+
+//   const filename = filenames[ i ];
+
+//   const texture = loader.load( filename );
+//   texture.minFilter = THREE.LinearFilter;
+//   texture.magFilter = THREE.LinearFilter;
+//   texture.colorSpace = THREE.SRGBColorSpace;
+
+//   textures[ filename ] = texture;
+
+// }
+
+
+//----------❏ RANDOM IMAGE DATA from UNSPLASH
 
 let topic = ["diamonds", "minerals", "eye", "iridescent", "eyes", "geometry", "New York", "Universe", "aurora borealis", "northern lights", "neon", "clouds", "smoke", "AI", "Caustics", "Fractals", "words", "colors", "abstract", "pattern"];
 
@@ -64,7 +70,9 @@ function populateElement() {
 }
 populateElement()
 
+
 const Template = "https://unsplash.com/photos/QwoNAhbmLLo";
+const anisotropyLevel = 16;
 
 const g_texture = (wildcard = "topic", repeat = 4) => {
   const path = `https://source.unsplash.com/random/?${wildcard}`;
@@ -86,30 +94,24 @@ const g_texture = (wildcard = "topic", repeat = 4) => {
   return preload;
 };
 
-   ////////////////////////////////////////////////////////////////
-// ✧ Material Constants https://threejs.org/docs/index.html#api/en/constants/Materials
+   // DOCS ////// ✧ Material Constants 
+// ⁍ https://threejs.org/docs/index.html#api/en/constants/Materials
 
 //These constants define properties common to all material types, with the exception of Texture Combine Operations which only apply to MeshBasicMaterial, MeshLambertMaterial and MeshPhongMaterial.
-
 //---✧ SIDE
 // Defines which side of faces will be rendered - front, back or both. Default is FrontSide.
 // THREE.FrontSide 
 // THREE.BackSide 
 // THREE.DoubleSide
-
-
 //---✧ BLENDING MODE
 // NormalBlending is the default. Note that CustomBlending must be set to use Custom Blending Equations.
-
 // THREE.NoBlending 
 // THREE.NormalBlending 
 // THREE.AdditiveBlending
 // THREE.SubtractiveBlending 
 // THREE.MultiplyBlending 
 // THREE.CustomBlending
-
 // These control the source and destination blending equations for the material's RGB and Alpha sent to the WebGLRenderer for use by WebGL.
-
 // See the materials / blending example.
 // Depth Mode
 // THREE.NeverDepth
@@ -120,9 +122,7 @@ const g_texture = (wildcard = "topic", repeat = 4) => {
 // THREE.GreaterEqualDepth 
 // THREE.GreaterDepth
 // THREE.NotEqualDepth
-
 // Which depth function the material uses to compare incoming pixels Z-depth against the current Z-depth buffer value. If the result of the comparison is true, the pixel will be drawn.
-
 // NeverDepth will never return true.
 // AlwaysDepth will always return true.
 // EqualDepth will return true if the incoming pixel Z-depth is equal to the current buffer Z-depth.
@@ -131,19 +131,14 @@ const g_texture = (wildcard = "topic", repeat = 4) => {
 // GreaterEqualDepth will return true if the incoming pixel Z-depth is greater than or equal to the current buffer Z-depth.
 // GreaterDepth will return true if the incoming pixel Z-depth is greater than the current buffer Z-depth.
 // NotEqualDepth will return true if the incoming pixel Z-depth is not equal to the current buffer Z-depth.
-
-
 //---✧ TEXTURE COMBINE OPERATIONS
 // THREE.MultiplyOperation 
 // THREE.MixOperation 
 // THREE.AddOperation
-
 // These define how the result of the surface's color is combined with the environment map (if present), for MeshBasicMaterial, MeshLambertMaterial and MeshPhongMaterial.
-
 // MultiplyOperation is the default and multiplies the environment map color with the surface color.
 // MixOperation uses reflectivity to blend between the two colors.
 // AddOperation adds the two colors.
-
 // Stencil Functions
 // THREE.NeverStencilFunc 
 // THREE.LessStencilFunc 
@@ -189,6 +184,50 @@ const g_texture = (wildcard = "topic", repeat = 4) => {
 // THREE.GLSL1 
 // THREE.GLSL3
 
+//---❏ GEOMETRIES DATA
+
+const domePARAMS =  {
+  radius: 10,
+  widthSegments: 32,
+  heightSegments: 32,
+  phiStart: 0,
+  phiLength: 6.2,
+  thetaStart: 0,
+  thetaLength: 1.1
+}
+const spherePARAMS =  {
+radius: 15,
+widthSegments: 32,
+heightSegments: 32,
+phiStart: 0,
+phiLength: 6.2,
+thetaStart: 0,
+thetaLength: 3.2
+}
+const cylinderPARAMS = {
+radiusTop: 10,
+radiusBottom: 10,
+height: 10,
+radialSegments: 32,
+heightSegments: 32,
+openEnded: false,
+thetaStart: 0
+}
+const torusPARAMS = {
+  radius: 1,
+  tube: 0.1,
+  tubularSegments: 200,
+  radialSegments: 30,
+  arc: 6.283,
+}
+const torusKnotPARAMS = {
+  radius: 1,
+  tube: 0.1,
+  tubularSegments: 300,
+  radialSegments: 20,
+  p: 1,
+  q: 3
+}
 
   ////////////////////////////////////////////////////////////////
 // ✧ Properties that take a texture image as an input 
@@ -221,6 +260,15 @@ const mBasicMat_maps = new THREE.MeshBasicMaterial (
   envMap: null,       // Cube texture for environment mapping
   }
 )
+
+const mirrorMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffffff,  // Set to white for a neutral reflection
+  metalness: 1.0,  // Full metalness for a mirror-like surface
+  roughness: 0.0,  // Low roughness for a smooth reflection
+  envMap: cubeMap,  // Use an environment map for reflections
+  transparent: true,  // Material is transparent
+  opacity: 1.0  // Adjust opacity as needed
+});
 
   ////////////////////////////////////////////////////////////////
 // ✧ Material Properties that take a value as an input 
@@ -256,8 +304,14 @@ const mBasicMat_maps = new THREE.MeshBasicMaterial (
   // mBasicMat_maps.fog= true,          // Whether the material is affected by fog
   // mBasicMat_maps.lights= true,       // Whether the material receives light
 
+//---✣ BASIC - DUO-COLOR DOME
+
+// const domeSkyMat = new THREE.MeshBasicMaterial({ color: hemiLightCategory.skyC, side: THREE.FrontSide})  // Render the inside of the dome
+// const domeGroundMat = new THREE.MeshBasicMaterial({ color: hemiLightCategory.groundC, side: THREE.BackSide})  // Render the inside of the dome
+
+
   ////////////////////////////////////////////////////////////////
-// ✧ Directional Light
+// ✧ Properties of Lights
 
 const dirLightPARAMS = {
   color: 0xffffff, // The color of the light
@@ -291,28 +345,28 @@ const controlPARAMS = {
   }
 
 const spotLightPARAMS = {
+  map: g_texture(wildCard, 2),
   color: 0xffffff,    // The color of the light
   intensity: 4,      // The intensity of the light
   distance: 50,      // Adjust based on your scene size
+  angle: Math.PI / 2.1, // The angle of the light's cone
+  penumbra: 1,       // The amount the light dims along the distance
   decay: 2,          // The amount the light dims along the distance
-  castShadow: true,  // Whether the light casts shadows
-  shadow: {
-    mapSize: {
-      width: 2048,    // Width of the shadow map
-      height: 2048,   // Height of the shadow map
-    },
-    bias: 0.001,      // Adjust for shadow bias
-    normalBias: 0.01, // Adjust for normal bias
-    radius: 4,        // Adjust for softer shadows
-  },
-  target: null,      // The light's target object
-};
+  focus: 1,         
+  penumbra: 1,
+  decay: 2,          // The amount the light dims along the distance
+  focus: 0.5,         
+  bias: 0.001,      // Adjust for shadow bias
+  normalBias: 0.01, // Adjust for normal bias
+  radius: 4       // Adjust for softer shadows   // The light's target object
+}
+
   
 const hemiLightPARAMS = {
-  skyColor: hemiLightCategory.skyC,    // The color of the sky
+  skyColor: hemiLightCategory.skyC,       // The color of the sky
   groundColor: hemiLightCategory.groundC, // The color of the ground
-  intensity: 1,         // The intensity of the light
-};
+  intensity: 0.05                         // The intensity of the light
+}
 
 
   ////////////////////////////////////////////////////////////////
@@ -331,12 +385,18 @@ class Demo {
   }
   init(){
 
-//---☞ TARGETS 
+//----------☞ TARGETS 
+
     const boxTarget = new THREE.Object3D();
     boxTarget.position.set(0, 0, 0); 
 
+//----------▲ GEOMETRIES
+
 //---✧ SPHERE
-    const sphereGeo = new THREE.SphereGeometry(geoPARAMS.sphereData)
+    const sphereGeo = new THREE.SphereGeometry(spherePARAMS)
+
+//---✧ DOME 
+    const domeGeo = new THREE.SphereGeometry(domePARAMS)
 
 //---✧ TORUS
     const torusGeo = new THREE.TorusGeometry()
@@ -349,24 +409,37 @@ class Demo {
 
 //---✧ PLANE
     const planeGeo = new THREE.PlaneGeometry(10, 10)
+    const mirrorGeo = new THREE.PlaneGeometry(10, 10)
     
-//-----✣ MATERIALS
+//----------✣ MATERIALS
 
-//---✣ PHYSICAL    
+//---✣ PHYSICAL
+
     mPhysicalMat_maps.flatShading= false,
     mPhysicalMat_maps.side= THREE.DoubleSide,
     mPhysicalMat_maps.precision= "highp"
 
 //---✣ BASIC 
+
     mBasicMat_maps.flatShading= false,
     mBasicMat_maps.side= THREE.DoubleSide,
     mBasicMat_maps.precision= "highp"
 
+//---✣ STANDARD
+
+    mirrorMaterial.side = THREE.DoubleSide;
+    mirrorMaterial.flatShading = true;
+    // mirrorMaterial.clippingPlanes = [mirrorPlane];
+    mirrorMaterial.clipShadows = true;
+    mirrorMaterial.shadowSide = THREE.BackSide;
+
+//---✣ PHYSICAL - DUO-COLOR DOME
+
 //---✣ LAMBERT
-    const matLambert = new THREE.MeshLambertMaterial()
+    // const matLambert = new THREE.MeshLambertMaterial()
     
 //---✣ PHONG
-    const matPhong = new THREE.MeshPhongMaterial()
+    // const matPhong = new THREE.MeshPhongMaterial()
 
 //----- MESHES
 
@@ -382,16 +455,20 @@ class Demo {
     sphere.castShadow = true
     sphere.receiveShadow = true
 
+    // const dome = new THREE.Mesh(domeGeo, domeMat);
+
     const plane = new THREE.Mesh(planeGeo, mBasicMat_maps)
     plane.castShadow = false
     plane.receiveShadow = true
+
+    const mirrorFloor = new THREE.Mesh(mirrorGeo, mirrorMaterial)
 
   //////////////////////////////////////////////////////////
 //-----✺ LIGHTS
 
 //--- HEMISPHERE
     const hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
-    hemiLight.position.set(0, 5, 0)
+    // hemiLight.position.set(0, 5, 0)
 
 
 //---✧ DIRECTIONAL LIGHT
@@ -405,6 +482,11 @@ class Demo {
     const spotLight = new THREE.SpotLight(spotLightPARAMS)
     spotLight.castShadow = true
     spotLight.target = boxTarget;
+    spotLight.shadow.mapSize.width= 1024
+    spotLight.shadow.mapSize.height= 1024
+    spotLight.shadow.camera.near= 1
+    spotLight.shadow.camera.far= 100
+    spotLight.shadow.focus= 1;
 
 //---✧ POINT LIGHT
 
@@ -416,16 +498,18 @@ class Demo {
 const gridHelper = new THREE.GridHelper(80, 80)
 const axesHelper = new THREE.AxesHelper()
 //const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 4, 0xfff) // Light- size of the arrowhead - color (optional).
-const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f) 
+const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
+
 
 
 //-----✧ POSITION
 
     box.position.set(0,0,0)
-    plane.position.y = -2
+    // plane.position.y = -2
+    mirrorFloor.position.y = -2
     sphere.position.set(0, 0, 0)
 
-    spotLight.position.set(0, 5, 0)
+    spotLight.position.set(0, 15, 0)
     spotLight.target.position.copy(box.position)
     // dirLight.position.set(0,5,0)
     // dirLight.target.position.copy(box.position)
@@ -436,13 +520,15 @@ const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
     
 //-----✧ ROTATION
 
-    plane.rotation.x = -Math.PI / 2;
+    // plane.rotation.x = -Math.PI / 2;
+    mirrorFloor.rotation.x = -Math.PI / 2;
 
 //-----✧ SCENE EVENTS
 
     this.rendering.scene.add(box)
     this.rendering.scene.add(sphere)
-    this.rendering.scene.add(plane)
+    //this.rendering.scene.add(plane)
+    this.rendering.scene.add(mirrorFloor)
 
     //this.rendering.scene.add(dirLight)
     this.rendering.scene.add(spotLight)
@@ -497,7 +583,6 @@ const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
 let demo = new Demo()
 
 setupControls(paletteKey)
-
 
 ////////////////////////////////////////////////////////////////////
 // ✧ RENDERER
