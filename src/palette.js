@@ -145,3 +145,46 @@ export const sinPalettes = {
     c3: new Color(0.5, 0.5, 0.5),
   },
 };
+
+export const hemiLightColors = {
+  sunset: {
+    skyC: 0xFFD700, // Light yellow for the sunset sky
+    groundC: 0x8B4513, // Brown for the ground
+  },
+  beach: {
+    skyC: 0x87CEFA, // Light sky blue for the beach sky
+    groundC: 0xFFFFE0, // Ivory for the ground
+  },
+  forest: {
+    skyC: 0x228B22, // Forest green for the forest sky
+    groundC: 0x8B4513, // Brown for the ground
+  },
+  desert: {
+    skyC: 0xFFD700, // Light yellow for the desert sky
+    groundC: 0xCD853F, // Peru for the ground
+  },
+  arctic: {
+    skyC: 0xB0E0E6, // Powder blue for the arctic sky
+    groundC: 0xFFFFFF, // White for the ground
+  },
+  jungle: {
+    skyC: 0x006400, // Dark green for the jungle sky
+    groundC: 0x8B4513, // Brown for the ground
+  },
+  ocean: {
+    skyC: 0x1E90FF, // Dodger blue for the ocean sky
+    groundC: 0x5F9EA0, // Cadet blue for the ground
+  },
+  mountain: {
+    skyC: 0x87CEEB, // Sky blue for the mountain sky
+    groundC: 0x8B4513, // Brown for the ground
+  },
+  urban: {
+    skyC: 0x708090, // Slate gray for the urban sky
+    groundC: 0x696969, // Dim gray for the ground
+  },
+  space: {
+    skyC: 0x000080, // Navy blue for the space sky
+    groundC: 0x000000, // Black for the ground
+  },
+};

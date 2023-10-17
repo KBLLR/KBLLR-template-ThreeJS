@@ -41,6 +41,13 @@ export class Rendering {
     this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false);
     this.renderer.setPixelRatio(this.vp.canvas.dpr);
 
+
+    this.renderer.shadowMap.enabled = true;
+		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+		this.renderer.toneMappingExposure = 1;
+
     ////////////////////////////////////////////////////////////////
 // ✧ CAMERA 
 
@@ -75,9 +82,11 @@ export class Rendering {
 
     this.addEvents(); 
   }
+
   addEvents() {
     window.addEventListener("resize", this.onResize);
   }
+
   dispose() {
     this.disposed = true;
     window.removeEventListener("resize", this.onResize);
@@ -95,16 +104,20 @@ export class Rendering {
     );
     return { width: height * this.camera.aspect, height };
   }
+
+//-----✓ INITIALIZATION
+
   init() {
   }
 
    update() {
-   this.ambientLight.color.getHex
+   // this.ambientLight.color.getHex
    }
 
   render() {
     this.renderer.render(this.scene, this.camera);
   }
+  
   onResize = () => {
     let canvas = this.canvas
     this.vp.canvas.width = canvas.offsetWidth;

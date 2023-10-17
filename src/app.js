@@ -4,14 +4,23 @@ import { gsap } from "gsap"
 import { Rendering } from "./renderer.js"
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
-import { palettes, sinPalettes } from "./palette";
-import { getPaletteFromParams, setupControls } from "./utils";
+import { palettes, sinPalettes, hemiLightColors } from "./palette.js";
+import { getPaletteFromParams, setupControls } from "./utils.js";
 
-// Colors 
+//--- COLORS
 let paletteKey = getPaletteFromParams("blue")
 
 let palette = palettes[paletteKey]
 let sinPalette = sinPalettes[paletteKey]
+
+function getRandomCategory() {
+  const categories = Object.keys(hemiLightColors)
+  const randomIndex = Math.floor(Math.random() * categories.length)
+  console.log(hemiLightColors[categories[randomIndex]])
+  return categories[randomIndex]
+}
+
+const hemiLightCategory = getRandomCategory();
 
 const anisotropyLevel = 16;
 
@@ -77,6 +86,110 @@ const g_texture = (wildcard = "topic", repeat = 4) => {
   return preload;
 };
 
+   ////////////////////////////////////////////////////////////////
+// ✧ Material Constants https://threejs.org/docs/index.html#api/en/constants/Materials
+
+//These constants define properties common to all material types, with the exception of Texture Combine Operations which only apply to MeshBasicMaterial, MeshLambertMaterial and MeshPhongMaterial.
+
+//---✧ SIDE
+// Defines which side of faces will be rendered - front, back or both. Default is FrontSide.
+// THREE.FrontSide 
+// THREE.BackSide 
+// THREE.DoubleSide
+
+
+//---✧ BLENDING MODE
+// NormalBlending is the default. Note that CustomBlending must be set to use Custom Blending Equations.
+
+// THREE.NoBlending 
+// THREE.NormalBlending 
+// THREE.AdditiveBlending
+// THREE.SubtractiveBlending 
+// THREE.MultiplyBlending 
+// THREE.CustomBlending
+
+// These control the source and destination blending equations for the material's RGB and Alpha sent to the WebGLRenderer for use by WebGL.
+
+// See the materials / blending example.
+// Depth Mode
+// THREE.NeverDepth
+// THREE.AlwaysDepth 
+// THREE.EqualDepth 
+// THREE.LessDepth
+// THREE.LessEqualDepth 
+// THREE.GreaterEqualDepth 
+// THREE.GreaterDepth
+// THREE.NotEqualDepth
+
+// Which depth function the material uses to compare incoming pixels Z-depth against the current Z-depth buffer value. If the result of the comparison is true, the pixel will be drawn.
+
+// NeverDepth will never return true.
+// AlwaysDepth will always return true.
+// EqualDepth will return true if the incoming pixel Z-depth is equal to the current buffer Z-depth.
+// LessDepth will return true if the incoming pixel Z-depth is less than the current buffer Z-depth.
+// LessEqualDepth is the default and will return true if the incoming pixel Z-depth is less than or equal to the current buffer Z-depth.
+// GreaterEqualDepth will return true if the incoming pixel Z-depth is greater than or equal to the current buffer Z-depth.
+// GreaterDepth will return true if the incoming pixel Z-depth is greater than the current buffer Z-depth.
+// NotEqualDepth will return true if the incoming pixel Z-depth is not equal to the current buffer Z-depth.
+
+
+//---✧ TEXTURE COMBINE OPERATIONS
+// THREE.MultiplyOperation 
+// THREE.MixOperation 
+// THREE.AddOperation
+
+// These define how the result of the surface's color is combined with the environment map (if present), for MeshBasicMaterial, MeshLambertMaterial and MeshPhongMaterial.
+
+// MultiplyOperation is the default and multiplies the environment map color with the surface color.
+// MixOperation uses reflectivity to blend between the two colors.
+// AddOperation adds the two colors.
+
+// Stencil Functions
+// THREE.NeverStencilFunc 
+// THREE.LessStencilFunc 
+// THREE.EqualStencilFunc
+// THREE.LessEqualStencilFunc 
+// THREE.GreaterStencilFunc
+// THREE.NotEqualStencilFunc 
+// THREE.GreaterEqualStencilFunc
+// THREE.AlwaysStencilFunc
+// Which stencil function the material uses to determine whether or not to perform a stencil operation.
+// NeverStencilFunc will never return true.
+// LessStencilFunc will return true if the stencil reference value is less than the current stencil value.
+// EqualStencilFunc will return true if the stencil reference value is equal to the current stencil value.
+// LessEqualStencilFunc will return true if the stencil reference value is less than or equal to the current stencil value.
+// GreaterStencilFunc will return true if the stencil reference value is greater than the current stencil value.
+// NotEqualStencilFunc will return true if the stencil reference value is not equal to the current stencil value.
+// GreaterEqualStencilFunc will return true if the stencil reference value is greater than or equal to the current stencil value.
+// AlwaysStencilFunc will always return true.
+// Stencil Operations
+// THREE.ZeroStencilOp 
+// THREE.KeepStencilOp 
+// THREE.ReplaceStencilOp
+// THREE.IncrementStencilOp 
+// THREE.DecrementStencilOp
+// THREE.IncrementWrapStencilOp 
+// THREE.DecrementWrapStencilOp
+// THREE.InvertStencilOp
+// Which stencil operation the material will perform on the stencil buffer pixel if the provided stencil function passes.
+// ZeroStencilOp will set the stencil value to 0.
+// KeepStencilOp will not change the current stencil value.
+// ReplaceStencilOp will replace the stencil value with the specified stencil reference value.
+// IncrementStencilOp will increment the current stencil value by 1.
+// DecrementStencilOp will decrement the current stencil value by 1.
+// IncrementWrapStencilOp will increment the current stencil value by 1. If the value increments past 255 it will be set to 0.
+// DecrementWrapStencilOp will increment the current stencil value by 1. If the value decrements below 0 it will be set to 255.
+// InvertStencilOp will perform a bitwise inversion of the current stencil value.
+// Normal map type
+// THREE.TangentSpaceNormalMap 
+// THREE.ObjectSpaceNormalMap
+// Defines the type of the normal map. For TangentSpaceNormalMap, the information is relative to the underlying surface. For ObjectSpaceNormalMap, the information is relative to the object orientation. Default is TangentSpaceNormalMap.
+
+// GLSL Version
+// THREE.GLSL1 
+// THREE.GLSL3
+
+
   ////////////////////////////////////////////////////////////////
 // ✧ Properties that take a texture image as an input 
 
@@ -110,7 +223,9 @@ const mBasicMat_maps = new THREE.MeshBasicMaterial (
 )
 
   ////////////////////////////////////////////////////////////////
-// ✧ Properties that take a value as an input 
+// ✧ Material Properties that take a value as an input 
+
+//---✣ PHYSICAL
 
   // mPhysicalMat_maps.attenuationDistance= 2.0,
   // mPhysicalMat_maps.emissive= 0x000,
@@ -131,7 +246,7 @@ const mBasicMat_maps = new THREE.MeshBasicMaterial (
   // mPhysicalMat_maps.displacementScale= 0.3,
   // mPhysicalMat_maps.displacementBias= 1.3,
 
-
+//---✣ BASIC 
 
   // mBasicMat_maps.color= 0xffffff,    // The color of the material
   // mBasicMat_maps.opacity= 1.0,       // Opacity of the material
@@ -140,7 +255,6 @@ const mBasicMat_maps = new THREE.MeshBasicMaterial (
   // mBasicMat_maps.wireframeLinewidth= 1, // Line width for wireframe rendering
   // mBasicMat_maps.fog= true,          // Whether the material is affected by fog
   // mBasicMat_maps.lights= true,       // Whether the material receives light
-
 
   ////////////////////////////////////////////////////////////////
 // ✧ Directional Light
@@ -176,12 +290,43 @@ const controlPARAMS = {
   maxPolarAngle: Math.PI / 2.1
   }
 
+const spotLightPARAMS = {
+  color: 0xffffff,    // The color of the light
+  intensity: 4,      // The intensity of the light
+  distance: 50,      // Adjust based on your scene size
+  decay: 2,          // The amount the light dims along the distance
+  castShadow: true,  // Whether the light casts shadows
+  shadow: {
+    mapSize: {
+      width: 2048,    // Width of the shadow map
+      height: 2048,   // Height of the shadow map
+    },
+    bias: 0.001,      // Adjust for shadow bias
+    normalBias: 0.01, // Adjust for normal bias
+    radius: 4,        // Adjust for softer shadows
+  },
+  target: null,      // The light's target object
+};
+  
+const hemiLightPARAMS = {
+  skyColor: hemiLightCategory.skyC,    // The color of the sky
+  groundColor: hemiLightCategory.groundC, // The color of the ground
+  intensity: 1,         // The intensity of the light
+};
+
+
+  ////////////////////////////////////////////////////////////////
+// ✧ MAIN CLASS - DEMO APP                                       //
+  //////////////////////////////////////////////////////////////
+
+
 class Demo {
   constructor(){
     this.rendering = new Rendering(document.querySelector("#canvas"), palette)
     this.controls = new OrbitControls(this.rendering.camera, this.rendering.canvas)
     this.controls.controlPARAMS
     this.uTime = new THREE.Uniform(0)
+    this.startAnimationLoop(); 
     this.init()
   }
   init(){
@@ -205,7 +350,7 @@ class Demo {
 //---✧ PLANE
     const planeGeo = new THREE.PlaneGeometry(10, 10)
     
-//---✣ MATERIALS
+//-----✣ MATERIALS
 
 //---✣ PHYSICAL    
     mPhysicalMat_maps.flatShading= false,
@@ -223,7 +368,7 @@ class Demo {
 //---✣ PHONG
     const matPhong = new THREE.MeshPhongMaterial()
 
-//--- MESHES
+//----- MESHES
 
     const box = new THREE.Mesh(boxGeo, mPhysicalMat_maps)
     box.castShadow = true
@@ -241,49 +386,111 @@ class Demo {
     plane.castShadow = false
     plane.receiveShadow = true
 
+  //////////////////////////////////////////////////////////
+//-----✺ LIGHTS
 
-//--- LIGHTS
+//--- HEMISPHERE
+    const hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
+    hemiLight.position.set(0, 5, 0)
 
-    const dirLight = new THREE.DirectionalLight(dirLightPARAMS)
-    dirLight.castShadow = true
-    dirLight.target = boxTarget;
 
-//---✧ GUI HELPERS 
+//---✧ DIRECTIONAL LIGHT
+
+    // const dirLight = new THREE.DirectionalLight(dirLightPARAMS)
+    // dirLight.castShadow = true
+    // dirLight.target = boxTarget;
+
+//---✧ SPOT LIGHT
+
+    const spotLight = new THREE.SpotLight(spotLightPARAMS)
+    spotLight.castShadow = true
+    spotLight.target = boxTarget;
+
+//---✧ POINT LIGHT
+
+    // const pointLight = new THREE.PointLight(pointLightPARAMS)
+    // pointLight.castShadow = true
+
+//-----✧ GUI HELPERS 
 
 const gridHelper = new THREE.GridHelper(80, 80)
 const axesHelper = new THREE.AxesHelper()
-const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 4, 0xfff) // Light- size of the arrowhead - color (optional).
+//const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 4, 0xfff) // Light- size of the arrowhead - color (optional).
+const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f) 
 
-//---  POSITION
+
+//-----✧ POSITION
 
     box.position.set(0,0,0)
-    dirLight.position.set(0,5,0)
-    dirLight.target.position.copy(box.position);
+    plane.position.y = -2
+    sphere.position.set(0, 0, 0)
+
+    spotLight.position.set(0, 5, 0)
+    spotLight.target.position.copy(box.position)
+    // dirLight.position.set(0,5,0)
+    // dirLight.target.position.copy(box.position)
+
     axesHelper.position.set(0, 0, 0)
     gridHelper.position.y = -2
-    plane.position.y = -2
-
-//--- ROTATION
+    
+    
+//-----✧ ROTATION
 
     plane.rotation.x = -Math.PI / 2;
 
-//--- SCENE EVENTS
+//-----✧ SCENE EVENTS
 
     this.rendering.scene.add(box)
     this.rendering.scene.add(sphere)
     this.rendering.scene.add(plane)
-    this.rendering.scene.add(dirLight)
+
+    //this.rendering.scene.add(dirLight)
+    this.rendering.scene.add(spotLight)
+    this.rendering.scene.add(hemiLight)
+
     this.rendering.scene.add(gridHelper)
-    //this.rendering.scene.add(axesHelper)
-    this.rendering.scene.add(dirLightHelper)
+    this.rendering.scene.add(axesHelper)
+    //this.rendering.scene.add(dirLightHelper)
+    this.rendering.scene.add(spotLightHelper)
+
+
     this.addEvents()
   }
-    addEvents(){
-      gsap.ticker.add(this.tick)
+
+  addEvents() {
+    window.addEventListener("resize", this.onResize);
   }
-  tick = (_time, delta)=>{
-    this.uTime.value += delta;
-    this.rendering.render()
+
+  dispose() {
+    this.disposed = true;
+    window.removeEventListener("resize", this.onResize);
+    this.renderer.dispose();
+    this.renderer.forceContextLoss();
+    this.renderer.context = null;
+    this.renderer.domElement = null;
+    this.renderer = null
+  }
+
+  getViewSizeAtDepth(depth = 0) {
+    const fovInRadians = (this.camera.fov * Math.PI) / 180;
+    const height = Math.abs(
+      (this.camera.position.z - depth) * Math.tan(fovInRadians / 2) * 2
+    );
+    return { width: height * this.camera.aspect, height };
+  }
+
+  //---✧ ANIMATION LOOP
+
+    startAnimationLoop() {
+    // This function will be called on every animation frame
+      const animate = (time) => {
+        this.uTime.value += time;
+        this.rendering.render();
+        this.controls.update();
+        requestAnimationFrame(animate)
+    }
+    // Start the animation loop
+      animate();
   }
 }
 
