@@ -1,8 +1,9 @@
 import "./style.css"
-// import "./wildCards.js"
-import { gsap } from "gsap"
+//import "./wildCards.js"
+//import Manager from "./loadingManager.js"
 import { Rendering } from "./renderer.js"
 import * as THREE from "three";
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { palettes, sinPalettes, hemiLightColors } from "./palette.js";
 import { getPaletteFromParams, setupControls } from "./utils.js";
@@ -21,23 +22,16 @@ function getRandomCategory() {
 }
 const hemiLightCategory = getRandomCategory();
 
-//---------- LIGHT / CUBEMAP TEXTURES
+//--- CUBE TEXTURE LOADER
+// https://threejs.org/docs/#api/en/loaders/CubeTextureLoader
+// https://threejs.org/examples/?q=cubemap#webgl_materials_cubemap_dynamic
+// https://threejs.org/docs/#api/en/textures
+// https://learnopengl.com/Advanced-OpenGL/Cubemaps
 
-const loader = new THREE.TextureLoader().setPath( 'textures/' )
-
-const cubeTextureLoader = new THREE.TextureLoader().setPath('src/assets/cubeMaps/')
-const cubeMaps = [
-  'px.png',
-  'nx.png',
-  'py.png',
-  'ny.png',
-  'pz.png',
-  'nz.png'
-]
-const cubeTexture = cubeTextureLoader.load(cubeMaps)
-cubeTexture.format = THREE.RGBAFormat
-const cubeMap = cubeTexture.mapping = THREE.CubeReflectionMapping
-
+// const cubeTextureLoader = new THREE.CubeTextureLoader()
+// cubeTextureLoader.setPath('src/assets/cubeMaps/')
+// const cubeMaps = ['px.jpg','nx.jpg','py.jpg','ny.jpg','pz.jpg','nz.jpg',]
+// const cubeTexture = cubeTextureLoader.load(cubeMaps);
 
 // const filenames = [ 'disturb.jpg', 'colors.png', 'uv_grid_opengl.jpg' ];
 
@@ -55,7 +49,6 @@ const cubeMap = cubeTexture.mapping = THREE.CubeReflectionMapping
 //   textures[ filename ] = texture;
 
 // }
-
 
 //----------❏ RANDOM IMAGE DATA from UNSPLASH
 
@@ -265,7 +258,6 @@ const mirrorMaterial = new THREE.MeshStandardMaterial({
   color: 0xffffff,  // Set to white for a neutral reflection
   metalness: 1.0,  // Full metalness for a mirror-like surface
   roughness: 0.0,  // Low roughness for a smooth reflection
-  envMap: cubeMap,  // Use an environment map for reflections
   transparent: true,  // Material is transparent
   opacity: 1.0  // Adjust opacity as needed
 });
@@ -376,14 +368,19 @@ const hemiLightPARAMS = {
 
 class Demo {
   constructor(){
+//----------☞ LOAD MANAGER
+  
     this.rendering = new Rendering(document.querySelector("#canvas"), palette)
     this.controls = new OrbitControls(this.rendering.camera, this.rendering.canvas)
     this.controls.controlPARAMS
     this.uTime = new THREE.Uniform(0)
-    this.startAnimationLoop(); 
+    this.startAnimationLoop()
+
     this.init()
   }
   init(){
+
+//----------☞ CUBE TEXTURE LOADER
 
 //----------☞ TARGETS 
 
@@ -409,10 +406,9 @@ class Demo {
 
 //---✧ PLANE
     const planeGeo = new THREE.PlaneGeometry(10, 10)
-    const mirrorGeo = new THREE.PlaneGeometry(10, 10)
+    // const mirrorGeo = new THREE.PlaneGeometry(10, 10)
     
 //----------✣ MATERIALS
-
 //---✣ PHYSICAL
 
     mPhysicalMat_maps.flatShading= false,
@@ -429,6 +425,7 @@ class Demo {
 
     mirrorMaterial.side = THREE.DoubleSide;
     mirrorMaterial.flatShading = true;
+    // mirrorMaterial.envMap = cubeTexture;
     // mirrorMaterial.clippingPlanes = [mirrorPlane];
     mirrorMaterial.clipShadows = true;
     mirrorMaterial.shadowSide = THREE.BackSide;
@@ -441,7 +438,7 @@ class Demo {
 //---✣ PHONG
     // const matPhong = new THREE.MeshPhongMaterial()
 
-//----- MESHES
+//---------- MESHES
 
     const box = new THREE.Mesh(boxGeo, mPhysicalMat_maps)
     box.castShadow = true
@@ -452,7 +449,7 @@ class Demo {
     // const torusK = new THREE.Mesh(torusKGeo, matPhysical)
 
     const sphere = new THREE.Mesh(sphereGeo, mPhysicalMat_maps)
-    sphere.castShadow = true
+    sphere.castShadow = false
     sphere.receiveShadow = true
 
     // const dome = new THREE.Mesh(domeGeo, domeMat);
@@ -461,15 +458,14 @@ class Demo {
     plane.castShadow = false
     plane.receiveShadow = true
 
-    const mirrorFloor = new THREE.Mesh(mirrorGeo, mirrorMaterial)
+    // const mirrorFloor = new THREE.Mesh(mirrorGeo, mirrorMaterial)
 
   //////////////////////////////////////////////////////////
-//-----✺ LIGHTS
-
+//----------✺ LIGHTS
 //--- HEMISPHERE
+
     const hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
     // hemiLight.position.set(0, 5, 0)
-
 
 //---✧ DIRECTIONAL LIGHT
 
@@ -500,13 +496,11 @@ const axesHelper = new THREE.AxesHelper()
 //const dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 4, 0xfff) // Light- size of the arrowhead - color (optional).
 const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
 
-
-
 //-----✧ POSITION
 
     box.position.set(0,0,0)
-    // plane.position.y = -2
-    mirrorFloor.position.y = -2
+    plane.position.y = -2
+    // mirrorFloor.position.y = -2
     sphere.position.set(0, 0, 0)
 
     spotLight.position.set(0, 15, 0)
@@ -520,15 +514,15 @@ const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
     
 //-----✧ ROTATION
 
-    // plane.rotation.x = -Math.PI / 2;
-    mirrorFloor.rotation.x = -Math.PI / 2;
+    plane.rotation.x = -Math.PI / 2;
+    //mirrorFloor.rotation.x = -Math.PI / 2;
 
 //-----✧ SCENE EVENTS
 
     this.rendering.scene.add(box)
     this.rendering.scene.add(sphere)
-    //this.rendering.scene.add(plane)
-    this.rendering.scene.add(mirrorFloor)
+    this.rendering.scene.add(plane)
+    //this.rendering.scene.add(mirrorFloor)
 
     //this.rendering.scene.add(dirLight)
     this.rendering.scene.add(spotLight)

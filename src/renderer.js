@@ -41,6 +41,9 @@ export class Rendering {
     this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false);
     this.renderer.setPixelRatio(this.vp.canvas.dpr);
 
+    ////////////////////////////////////////////////////////////////
+// ✧ TONE MAPPING
+// https://offscreencanvas.com/issues/webgl-tone-mapping/
 
     this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -117,7 +120,7 @@ export class Rendering {
   render() {
     this.renderer.render(this.scene, this.camera);
   }
-  
+
   onResize = () => {
     let canvas = this.canvas
     this.vp.canvas.width = canvas.offsetWidth;
