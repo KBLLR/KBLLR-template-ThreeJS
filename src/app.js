@@ -4,7 +4,8 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import { Rendering } from "./renderer.js"
 import { palettes, sinPalettes, hemiLightColors } from "./palette.js"
 import { getPaletteFromParams, setupControls } from "./utils.js"
-import { torusKComponent, torusComponent, cylinderComponent, sphereComponent, cubeComponent, planeComponent, coneComponent } from "./meshes.js"
+import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh } from "./meshes.js";
+
 
 //--- COLOR PALETTE CONTROLS
 
@@ -31,28 +32,68 @@ class Demo {
 //----------☞ TARGETS 
 
     const boxTarget = new THREE.Object3D();
-    boxTarget.position.set(0, 0, 0); 
+    boxTarget.position.set(0, 0, 0);
+
+//------------ MESHES 
+
+    this.sphereMesh = sphereMesh
+    this.sphereMesh.position.set(0, 8, 0)
+    this.sphereMesh.scale.set(30, 10, 20)
+    this.sphereMesh.rotation.set(0, 30, 0)
+
+    this.cubeMesh = cubeMesh
+    this.cubeMesh.position.set(0, 4, 0)
+    this.cubeMesh.scale.set(2, 7, 5)
+    this.cubeMesh.rotation.set(0, 0, 0)
+
+    // this.coneMesh = coneMesh
+    // this.coneMesh.position.set(0, 4, 0)
+    // this.coneMesh.scale.set(4, 9, 2)
+    // this.coneMesh.rotation.set(0, 0, 0)
+
+    // this.torusMesh = torusMesh
+    // this.torusMesh.position.set(0, 3, 0)
+    // this.torusMesh.scale.set(4, 10, 7)
+    // this.torusMesh.rotation.set(-Math.PI / 2, 0, 0)
+
+    this.torusKMesh = torusKMesh
+    this.torusKMesh.position.set(0, 3, 0)
+    this.torusKMesh.scale.set(1, 4, 2)
+    this.torusKMesh.rotation.set(0, 0, 0)
+
+    this.planeMesh = planeMesh
+    this.planeMesh.position.set(0, -2, 0)
+    this.planeMesh.scale.set(10, 10, 5)
+    this.planeMesh.rotation.set(-Math.PI / 2, 0, 0) 
+    
+    this.cylinderMesh = cylinderMesh
+    this.cylinderMesh.position.set(0, 0, 0)
+    this.cylinderMesh.scale.set(3, 4, 6)
+    this.cylinderMesh.rotation.set(0, 0, 0) 
+
+    this.rendering.scene.add(this.sphereMesh)
+    this.rendering.scene.add(this.coneMesh)
+    this.rendering.scene.add(this.cubeMesh)
+    this.rendering.scene.add(this.planeMesh)
+    this.rendering.scene.add(this.cylinderMesh)
+    this.rendering.scene.add(this.torusMesh)
+    this.rendering.scene.add(this.torusKMesh)
 
 
 //-----✧ GUI HELPERS 
 
-const gridHelper = new THREE.GridHelper(80, 80)
-const axesHelper = new THREE.AxesHelper()
+    const gridHelper = new THREE.GridHelper(0, 0)
+    const axesHelper = new THREE.AxesHelper()
 
 
 //-----✧ POSITION
+
     //axesHelper.position.set(0, 0, 0)
     gridHelper.position.y = -2
-    
     
 //-----✧ ROTATION
 
 //-----✧ SCENE EVENTS
-
-    // this.rendering.scene.add(cubeComponent)
-    // this.rendering.scene.add(sphereComponent)
-    // this.rendering.scene.add(torusKComponent)
-    // this.rendering.scene.add(planeComponent)
 
     //this.rendering.scene.add(dirLight)
     // this.rendering.scene.add(spotLight)
@@ -61,7 +102,6 @@ const axesHelper = new THREE.AxesHelper()
     this.rendering.scene.add(gridHelper)
     //this.rendering.scene.add(axesHelper)
     //this.rendering.scene.add(dirLightHelper)
-
 
 
     this.addEvents()

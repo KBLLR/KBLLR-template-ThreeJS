@@ -49,6 +49,7 @@ export class Rendering {
 
     ////////////////////////////////////////////////////////////////
 // ✧ TONE MAPPING -- https://offscreencanvas.com/issues/webgl-tone-mapping/
+
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
 		this.renderer.toneMappingExposure = 1
     this.renderer.gammaFactor = 2.2
@@ -69,7 +70,6 @@ export class Rendering {
 // ✧ LIGHTS
 
     // this.hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
-
     //this.ambientLight = new THREE.AmbientLight(palette.highlight, 0.8)
 
     this.spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
@@ -91,7 +91,6 @@ export class Rendering {
     this.spotLight.shadow.camera.far= 100
     this.spotLight.shadow.focus= 1;
 
-
   ////////////////////////////////////////////////////////////////
 // ✧ SCENE
 
@@ -109,6 +108,7 @@ export class Rendering {
 
     this.addEvents(); 
   }
+  
 
   addEvents() {
     window.addEventListener("resize", this.onResize);
@@ -135,6 +135,7 @@ export class Rendering {
 //-----✓ INITIALIZATION
 
   init() {
+
   }
 
    update() {

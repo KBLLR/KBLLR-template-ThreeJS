@@ -25,14 +25,34 @@
   <body>
     <!-- Cursor -->
     <div id="custom-cursor"></div>
+
     <!-- Canvas -->
     <div id="canvas-wrapper"><canvas id="canvas"></canvas></div>
-    <!-- UI -->
+
+    <!-- UI TITLES -->
     <div class="ui">
-      <div id="result-element">10.2023</div>
-      <h6 class="ui-logo">KBLLR.graphics</h6>
+      <div id="result-element">Berlin,10.2023</div>
+      <h4 class="ui-Col-Title">KBLLR.graphics</h4>
       <h3 id="ui-title">DEMO-TITLE</h3>
     </div>
+
+    <!-- UI INPUTS -->
+    <div id="ui-bar-wraper">
+      <div id="ui-bar">
+        <div class="left">
+          <button id="generateRandomWord">Random Inspiration</button>
+        </div>
+        <div class="middle">
+          <input type="text" id="inputWord" placeholder="Dare to dream">
+        </div>
+        <div class="right">
+            <button id="sendWord">Send</button>
+        </div>
+        </div>
+      </div>
+
+
+
     <!-- Debug -->
     <div class="data-layout-C">
       <div class="column" id="debug,--1"></div>
@@ -42,6 +62,7 @@
       <div class="column" id="debug,--5"></div>
       <div class="column" id="debug,--6"></div>
     </div>
+    
     <div class="data-layout-R">
       <div class="row" id="debug,--1"></div>
       <div class="row" id="debug,--2"></div>

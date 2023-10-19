@@ -9,10 +9,12 @@
         "ignore": [
           "-webkit-text-size-adjust",
           "overscroll-behavior",
-          "user-select"
+          "user-select",
+          "text-decoration-skip-ink"
         ]
       }
     ],
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "button-type": "off"
   }
 }
