@@ -65,4 +65,27 @@ class Manager {
   }
 }
 
-export default Manager;
+export default Manager
+
+
+// const cubeTextureLoader = new THREE.CubeTextureLoader()
+// cubeTextureLoader.setPath('src/assets/cubeMaps/')
+// const cubeMaps = ['px.jpg','nx.jpg','py.jpg','ny.jpg','pz.jpg','nz.jpg',]
+// const cubeTexture = cubeTextureLoader.load(cubeMaps);
+
+// const filenames = [ 'disturb.jpg', 'colors.png', 'uv_grid_opengl.jpg' ];
+
+// const textures = { none: null };
+
+// for ( let i = 0; i < filenames.length; i ++ ) {
+
+//   const filename = filenames[ i ];
+
+//   const texture = loader.load( filename );
+//   texture.minFilter = THREE.LinearFilter;
+//   texture.magFilter = THREE.LinearFilter;
+//   texture.colorSpace = THREE.SRGBColorSpace;
+
+//   textures[ filename ] = texture;
+
+// }

@@ -10,7 +10,25 @@ export function getMousePos(e){
     };
 }
 
+
+////////////////////
+// ✧ RANDOMIZERS///
+
+//--Random RGB Color Generator
+// let rRGB = () => Math.random() * 256 >> 0
+// let randRGB = `rgb(${rRGB()}, ${rRGB()}, ${rRGB()})`
+// console.log(randRGB)
+
+// //--Random PARAM between 0.1 and 1.0
+// let rParam = () => Math.random() * 1.0 >> 0.1
+// let randPARAM = `rParam()`
+// console.log(randPARAM)
+
+// //--Random RGBa Color Generator
+// let randRGBa = `rgb(${rRGB()}, ${rRGB()}, ${rRGB()}, ${rParam()})`
+
 // Demo Utils
+
 
 export function getPaletteFromParams(defaultPalette = "black"){
   let search = new URLSearchParams(window.location.search)

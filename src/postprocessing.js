@@ -1,4 +1,4 @@
-
+ 
 // Set up the effect composer and add post-processing passes
 const composer = new EffectComposer(renderer); // 'renderer' is the renderer from your rendering setup
 const renderPass = new RenderPass(scene, camera);

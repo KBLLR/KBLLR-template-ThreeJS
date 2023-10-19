@@ -146,6 +146,16 @@ export const sinPalettes = {
   },
 };
 
+//--- HEMILIGHT SKY & GROUND COLOR PICKERS
+
+// function getRandomCategory() {
+//   const categories = Object.keys(hemiLightColors)
+//   const randomIndex = Math.floor(Math.random() * categories.length)
+//   console.log(hemiLightColors[categories[randomIndex]])
+//   return categories[randomIndex]
+// }
+// const hemiLightCategory = getRandomCategory()
+
 export const hemiLightColors = {
   sunset: {
     skyC: 0xFFD700, // Light yellow for the sunset sky

@@ -1,4 +1,5 @@
-import * as THREE from "three";
+import * as THREE from "three"
+import { spotLightPARAMS } from "./parameters.js"
 
 export class Rendering {
   constructor(canvas, palette) {
@@ -33,23 +34,24 @@ export class Rendering {
         antialias: true,
         canvas,
         depth: true,
-        alpha: true,
-        stencil: true,
+        alpha: false,
+        stencil: false,
         preserveDrawingBuffer: false,
+        gammaOutput: false,
     });
 
     this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false);
     this.renderer.setPixelRatio(this.vp.canvas.dpr);
 
-    ////////////////////////////////////////////////////////////////
-// ✧ TONE MAPPING
-// https://offscreencanvas.com/issues/webgl-tone-mapping/
-
+    this.render.legacyLights = false
     this.renderer.shadowMap.enabled = true;
 		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+    ////////////////////////////////////////////////////////////////
+// ✧ TONE MAPPING -- https://offscreencanvas.com/issues/webgl-tone-mapping/
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-		this.renderer.toneMappingExposure = 1;
+		this.renderer.toneMappingExposure = 1
+    this.renderer.gammaFactor = 2.2
 
     ////////////////////////////////////////////////////////////////
 // ✧ CAMERA 
@@ -66,7 +68,29 @@ export class Rendering {
     ////////////////////////////////////////////////////////////////
 // ✧ LIGHTS
 
+    // this.hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
+
     //this.ambientLight = new THREE.AmbientLight(palette.highlight, 0.8)
+
+    this.spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
+    this.spotLight.angle = Math.PI / 3
+    this.spotLight.penumbra = 0.1
+    this.spotLight.decay = 2
+    // this.spotLight.spotLightPARAMS
+    this.spotLight.position.set(0, 15, 0)
+
+    const spotLightHelper = new THREE.SpotLightHelper(this.spotLight, 4, 0xff0f0f)
+    // spotLight.target.position.copy(cubeComponent.cubeMesh.position);
+
+    this.spotLight.visible = true
+    this.spotLight.castShadow = true
+    // this.spotLight.target = boxTarget;
+    this.spotLight.shadow.mapSize.width= 1024
+    this.spotLight.shadow.mapSize.height= 1024
+    this.spotLight.shadow.camera.near= 1
+    this.spotLight.shadow.camera.far= 100
+    this.spotLight.shadow.focus= 1;
+
 
   ////////////////////////////////////////////////////////////////
 // ✧ SCENE
