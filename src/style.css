@@ -1,3 +1,92 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/* Remove default padding */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+/* Remove list styles on ul, ol elements */
+ul[class],
+ol[class] {
+  list-style: none;
+}
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+/* Natural flow and rhythm in articles by default */
+article > * + * {
+  margin-top: 1em;
+}
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../src/fonts/Roboto-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto-Medium';
+  src: url('../src/fonts/Roboto-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../src/fonts/Roboto-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto-Thin';
+  src: url('../src/fonts/Roboto-Thin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'flowa';
+  src: url('../src/fonts/flowa.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'pirulen';
+  src: url('../src/fonts/pirulen.woff2') format('woff2');
+}
 
 #canvas {
   width: 100%;
@@ -13,28 +102,6 @@
 }
 
 :root {
-  --tp-base-background-color: hsla(0, 0%, 100%, 0.6);
-  --tp-container-background-color: hsla(0, 0%, 3%, 0.4);
-  --tp-base-shadow-color: hsla(0, 0%, 100%, 0);
-  --tp-button-background-color: hsla(264, 5%, 18%, 0.8);
-  --tp-button-background-color-active: hsla(269.25, 93.75%, 43.75%, 0.5);
-  --tp-button-background-color-focus: hsla(359, 6.25%, 6.25%, 0.5);
-  --tp-button-background-color-hover: hsla(0, 0%, 100%, 0.5);
-  --tp-button-foreground-color: hsla(0, 1%, 46%, 0.9);
-  --tp-container-background-color-active: rgba(38, 38, 38, 0.20);
-  --tp-container-background-color-focus: rgba(26, 26, 26, 0.20);
-  --tp-container-background-color-hover: rgba(13, 13, 13, 0.20);
-  --tp-container-foreground-color: rgb(105, 108, 106);
-  --tp-groove-foreground-color: rgb(238, 238, 238);
-  --tp-input-background-color: hsla(0, 0%, 0%, 0.50);
-  --tp-input-background-color-active: hsla(0, 0%, 0%, 0.50);
-  --tp-input-background-color-focus: hsla(0, 0%, 10%, 0.50);
-  --tp-input-background-color-hover: hsla(137, 100%, 99%, 0.8);
-  --tp-input-foreground-color: rgb(255, 255, 255);
-  --tp-label-foreground-color: rgb(17, 16, 16);
-  --tp-monitor-background-color: hsla(0, 74%, 51%, 0.5);
-  --tp-monitor-foreground-color: hsla(0, 0%, 100%, 0.50);
-
   --white: color: hsla(0, 0%, 100%, 0.6)
 }
 
