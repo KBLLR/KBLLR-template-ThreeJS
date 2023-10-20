@@ -124,11 +124,13 @@ export const spotLightPARAMS = {
     radius: 4,
   }
   
-  export const hemiLightPARAMS = {
-    // skyColor: hemiLightCategory.skyC,
-    // groundColor: hemiLightCategory.groundC,
-    intensity: 0.05,
-  }
+export const hemiLightPARAMS = {
+  // skyColor: hemiLightCategory.skyC,
+  // groundColor: hemiLightCategory.groundC,
+  intensity: 0.05,
+}
+
+
 
 // const PARAMS = {
 //   camera: {},

@@ -1,11 +1,10 @@
 import { TextureGenerator } from "./textures.js"
 import * as THREE from 'three'
 
+const textureGenerator = new TextureGenerator()
+textureGenerator.populateElement()
 
-const textureGenerator = new TextureGenerator();
-textureGenerator.populateElement();
-
-const myTexture = textureGenerator.g_texture("your-topic", 4);
+const myTexture = textureGenerator.g_texture("your-topic", 4)
 
 //------------------------------------------------------------------------------ ◉
 const cubeParams = {
@@ -15,44 +14,20 @@ const cubeParams = {
   widthSegments: 10,
   heightSegments: 1,
   depthSegments: 1,
-};
-const cubeG = new THREE.BoxGeometry(
-  cubeParams.width,
-  cubeParams.height,
-  cubeParams.depth,
-  cubeParams.widthSegments,
-  cubeParams.heightSegments,
-  cubeParams.depthSegments
-);
-
+}
 const circleParams = {
   radius: 1,
   segments: 32,
   thetaStart: 0,
   thetaLength: Math.PI * 2,
-};
-const circleG = new THREE.CircleGeometry(
-  circleParams.radius,
-  circleParams.segments,
-  circleParams.thetaStart,
-  circleParams.thetaLength
-);
-
+}
 const coneParams = {
   radius: 1,
   height: 1,
   radialSegments: 32,
   heightSegments: 1,
   openEnded: false,
-};
-const coneG = new THREE.ConeGeometry(
-  coneParams.radius,
-  coneParams.height,
-  coneParams.radialSegments,
-  coneParams.heightSegments,
-  coneParams.openEnded
-);
-
+}
 const cylinderParams = {
   radiusTop: 1,
   radiusBottom: 1,
@@ -60,29 +35,13 @@ const cylinderParams = {
   radialSegments: 32,
   heightSegments: 1,
   openEnded: false,
-};
-const cylinderG = new THREE.CylinderGeometry(
-  cylinderParams.radiusTop,
-  cylinderParams.radiusBottom,
-  cylinderParams.height,
-  cylinderParams.radialSegments,
-  cylinderParams.heightSegments,
-  cylinderParams.openEnded
-);
-
+}
 const planeParams = {
   width: 1,
   height: 1,
   widthSegments: 1,
   heightSegments: 1,
-};
-const planeG = new THREE.PlaneGeometry(
-  planeParams.width,
-  planeParams.height,
-  planeParams.widthSegments,
-  planeParams.heightSegments
-);
-
+}
 const ringParams = {
   innerRadius: 0.5,
   outerRadius: 1,
@@ -90,16 +49,7 @@ const ringParams = {
   phiSegments: 1,
   thetaStart: 0,
   thetaLength: Math.PI * 2,
-};
-const ringG = new THREE.RingGeometry(
-  ringParams.innerRadius,
-  ringParams.outerRadius,
-  ringParams.thetaSegments,
-  ringParams.phiSegments,
-  ringParams.thetaStart,
-  ringParams.thetaLength
-);
-
+}
 const sphereParams = {
   radius: 1,
   widthSegments: 32,
@@ -108,32 +58,14 @@ const sphereParams = {
   phiLength: Math.PI,
   thetaStart: 0,
   thetaLength: Math.PI * 2,
-};
-const sphereG = new THREE.SphereGeometry(
-  sphereParams.radius,
-  sphereParams.widthSegments,
-  sphereParams.heightSegments,
-  sphereParams.phiStart,
-  sphereParams.phiLength,
-  sphereParams.thetaStart,
-  sphereParams.thetaLength
-);
-
+}
 const torusParams = {
   radius: 10,
   tube: 10.15,
   radialSegments: 32,
   tubularSegments: 32,
   arc: Math.PI * 2,
-};
-const torusG = new THREE.TorusGeometry(
-  torusParams.radius,
-  torusParams.tube,
-  torusParams.radialSegments,
-  torusParams.tubularSegments,
-  torusParams.arc
-);
-
+}
 const torusKParams = {
   radius: 14,
   tube: 0.19,
@@ -142,8 +74,36 @@ const torusKParams = {
   p: 22,
   q: 53,
   heightScale: 10,
-};
+}
+//------------------------------------------------------------------------------ ◉
 
+// Cube
+const cubeG = new THREE.BoxGeometry(cubeParams.width,cubeParams.height,cubeParams.depth,cubeParams.widthSegments,cubeParams.heightSegments,cubeParams.depthSegments)
+
+// Sphere
+const sphereG = new THREE.SphereGeometry(
+  sphereParams.radius,
+  sphereParams.widthSegments,
+  sphereParams.heightSegments,
+  sphereParams.phiStart,
+  sphereParams.phiLength,
+  sphereParams.thetaStart,
+  sphereParams.thetaLength
+)
+
+// Cone
+const coneG = new THREE.ConeGeometry(coneParams.radius,coneParams.height,coneParams.radialSegments,coneParams.heightSegments,coneParams.openEnded)
+
+// Torus
+const torusG = new THREE.TorusGeometry(
+  torusParams.radius,
+  torusParams.tube,
+  torusParams.radialSegments,
+  torusParams.tubularSegments,
+  torusParams.arc
+)
+
+// TorusK
 const torusKG = new THREE.TorusKnotGeometry(
   torusKParams.radius,
   torusKParams.tube,
@@ -152,17 +112,49 @@ const torusKG = new THREE.TorusKnotGeometry(
   torusKParams.p,
   torusKParams.q,
   torusKParams.heightScale
-);
+)
+
+// Plane
+const planeG = new THREE.PlaneGeometry(
+  planeParams.width,
+  planeParams.height,
+  planeParams.widthSegments,
+  planeParams.heightSegments
+)
+
+// Cylinder
+const cylinderG = new THREE.CylinderGeometry(
+  cylinderParams.radiusTop,
+  cylinderParams.radiusBottom,
+  cylinderParams.height,
+  cylinderParams.radialSegments,
+  cylinderParams.heightSegments,
+  cylinderParams.openEnded
+)
+//------------------------------------------------------------------------------ ◉
+const circleG = new THREE.CircleGeometry(circleParams.radius,circleParams.segments,circleParams.thetaStart,circleParams.thetaLength)
+//------------------------------------------------------------------------------ ◉
+
+const ringG = new THREE.RingGeometry(
+  ringParams.innerRadius,
+  ringParams.outerRadius,
+  ringParams.thetaSegments,
+  ringParams.phiSegments,
+  ringParams.thetaStart,
+  ringParams.thetaLength
+)
 
 const spriteParams = {
   material: new THREE.SpriteMaterial(),
   scale: new THREE.Vector2(1, 1),
-};
-const spriteG = new THREE.Sprite(spriteParams);
+}
+const spriteG = new THREE.Sprite(spriteParams)
 
 //------------------------------------------------------------------------------ ◉
-const wildMapMisc = textureGenerator.g_texture(textureGenerator.wildCard, 4)
+
 //------------------------------------------------------------------------------ ◉
+
+const wildMapMisc = textureGenerator.g_texture(textureGenerator.wildCard, 4)
 
 //------------------------------------------------------------------------------ ◉
 const MeshPhysicalMaterialParameters = {
@@ -294,10 +286,10 @@ const MeshStandardMaterialParams = {
 }
 
 //------------------------------------------------------------------------------ ◉
-const MeshStandardMaterial = new THREE.MeshStandardMaterial(MeshStandardMaterialParams);
-const MeshPhongMaterial = new THREE.MeshPhongMaterial(MeshPhongMaterialParams);
-const MeshLambertMaterial = new THREE.MeshLambertMaterial(MeshLambertMaterialParams);
-const MeshBasicMaterial = new THREE.MeshBasicMaterial(MeshBasicMaterialParams);
+const MeshStandardMaterial = new THREE.MeshStandardMaterial(MeshStandardMaterialParams)
+const MeshPhongMaterial = new THREE.MeshPhongMaterial(MeshPhongMaterialParams)
+const MeshLambertMaterial = new THREE.MeshLambertMaterial(MeshLambertMaterialParams)
+const MeshBasicMaterial = new THREE.MeshBasicMaterial(MeshBasicMaterialParams)
 const MeshPhysicalMaterial = new THREE.MeshPhysicalMaterial(MeshPhysicalMaterialParams)
 //------------------------------------------------------------------------------ ◉
 
@@ -310,4 +302,3 @@ export const coneMesh = new THREE.Mesh(coneG, MeshStandardMaterial)
 export const torusMesh = new THREE.Mesh(torusG, MeshPhysicalMaterial)
 export const planeMesh = new THREE.Mesh(planeG, MeshBasicMaterial)
 //------------------------------------------------------------------------------ ◉
-

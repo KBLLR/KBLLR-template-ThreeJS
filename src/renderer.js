@@ -34,31 +34,35 @@ export class Rendering {
         antialias: true,
         canvas,
         depth: true,
-        alpha: false,
+        alpha: true,
         stencil: false,
         preserveDrawingBuffer: false,
         gammaOutput: false,
     });
 
-    this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false);
-    this.renderer.setPixelRatio(this.vp.canvas.dpr);
+    this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false)
+    this.renderer.setPixelRatio(this.vp.canvas.dpr)
 
     this.render.legacyLights = false
-    this.renderer.shadowMap.enabled = true;
-		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.shadowMap.enabled = true
+		this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
     ////////////////////////////////////////////////////////////////
 // ✧ TONE MAPPING -- https://offscreencanvas.com/issues/webgl-tone-mapping/
 
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping
 		this.renderer.toneMappingExposure = 1
     this.renderer.gammaFactor = 2.2
+
+    this.pmremGenerator = new THREE.PMREMGenerator(this.renderer)
+    this.pmremGenerator.compileEquirectangularShader()
+
 
     ////////////////////////////////////////////////////////////////
 // ✧ CAMERA 
 
     this.camera = new THREE.PerspectiveCamera(
-      50,
+      60,
       this.vp.canvas.width / this.vp.canvas.height,
       0.01,
       1000
@@ -66,30 +70,6 @@ export class Rendering {
     this.camera.position.set(0, 0,8);
     this.camera.lookAt(0, 0, 0);
 
-    ////////////////////////////////////////////////////////////////
-// ✧ LIGHTS
-
-    // this.hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
-    //this.ambientLight = new THREE.AmbientLight(palette.highlight, 0.8)
-
-    this.spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
-    this.spotLight.angle = Math.PI / 3
-    this.spotLight.penumbra = 0.1
-    this.spotLight.decay = 2
-    // this.spotLight.spotLightPARAMS
-    this.spotLight.position.set(0, 15, 0)
-
-    const spotLightHelper = new THREE.SpotLightHelper(this.spotLight, 4, 0xff0f0f)
-    // spotLight.target.position.copy(cubeComponent.cubeMesh.position);
-
-    this.spotLight.visible = true
-    this.spotLight.castShadow = true
-    // this.spotLight.target = boxTarget;
-    this.spotLight.shadow.mapSize.width= 1024
-    this.spotLight.shadow.mapSize.height= 1024
-    this.spotLight.shadow.camera.near= 1
-    this.spotLight.shadow.camera.far= 100
-    this.spotLight.shadow.focus= 1;
 
   ////////////////////////////////////////////////////////////////
 // ✧ SCENE
@@ -97,8 +77,13 @@ export class Rendering {
     this.scene = new THREE.Scene();
     this.scene.background = palette.BG.clone()
 
-    this.fog = new THREE.FogExp2(0xffffff, 0.5);
-    this.scene.fog 
+    // const fogColor = 0xf0f0f0
+    // const fogDensity = 0.05
+    // const fogNear = 0.01
+    // const fogFar = 1000
+
+    // this.fog = new THREE.FogExp2(fogColor, fogDensity, fogNear, fogFar)
+    // this.scene.fog = this.fog
 
     this.clock = new THREE.Clock();
 

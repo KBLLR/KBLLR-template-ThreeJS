@@ -10,7 +10,6 @@ export function getMousePos(e){
     };
 }
 
-
 ////////////////////
 // ✧ RANDOMIZERS///
 
@@ -56,7 +55,7 @@ export function setupControls(palette){
         let prevPalette = (currentI - 1) < 0 ? palettes.length-1: currentI - 1;
         console.log(palettes[prevPalette])
         window.location.search = "?palette="+palettes[prevPalette]
-        // window.location.reload()
+        window.location.reload()
       break;
       case "ArrowRight":
         let nextPalette = (currentI + 1) % palettes.length

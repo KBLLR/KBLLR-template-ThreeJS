@@ -1,11 +1,13 @@
 import "./style.css"
 import * as THREE from "three"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
+import CameraControls from 'camera-controls'
 import { Rendering } from "./renderer.js"
 import { palettes, sinPalettes, hemiLightColors } from "./palette.js"
 import { getPaletteFromParams, setupControls } from "./utils.js"
 import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh } from "./meshes.js";
+import loadingManager from "./manager.js"
 
+CameraControls.install( { THREE } )
 
 //--- COLOR PALETTE CONTROLS
 
@@ -19,70 +21,102 @@ let sinPalette = sinPalettes[paletteKey]
 
 class Demo {
   constructor(){
-
     this.rendering = new Rendering(document.querySelector("#canvas"), palette)
-    this.controls = new OrbitControls(this.rendering.camera, this.rendering.canvas)
+    this.cameraControls = new CameraControls(this.rendering.camera, this.rendering.canvas)
     this.uTime = new THREE.Uniform(0)
+    this.clock = new THREE.Clock()
     this.startAnimationLoop()
 
     this.init()
   }
+
   init(){
+
+//----------☞ CONTROLS
+
+    this.cameraControls.enabled = true
+
+
+    console.log(
+      this.cameraControls.active, 
+      this.cameraControls.currentAction,
+      this.cameraControls.distance,
+      this.cameraControls.minDistance,
+      )
 
 //----------☞ TARGETS 
 
     const boxTarget = new THREE.Object3D();
     boxTarget.position.set(0, 0, 0);
 
+
+    ////////////////////////////////////////////////////////////////
+// ✧ LIGHTS
+
+    // this.hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
+    //this.ambientLight = new THREE.AmbientLight(palette.highlight, 0.8)
+
+
 //------------ MESHES 
 
-    this.sphereMesh = sphereMesh
-    this.sphereMesh.position.set(0, 8, 0)
-    this.sphereMesh.scale.set(30, 10, 20)
-    this.sphereMesh.rotation.set(0, 30, 0)
+    this.sphereMesh = sphereMesh;
+    this.sphereMesh.position.set(0, 0, 0)
+    this.sphereMesh.scale.set(1, 1, 1)
+    this.sphereMesh.rotation.set(0, 0, 0)
 
-    this.cubeMesh = cubeMesh
-    this.cubeMesh.position.set(0, 4, 0)
-    this.cubeMesh.scale.set(2, 7, 5)
+    this.cubeMesh = cubeMesh;
+    this.cubeMesh.position.set(-5, 0, 0)
+    this.cubeMesh.scale.set(1, 1, 1)
     this.cubeMesh.rotation.set(0, 0, 0)
 
-    // this.coneMesh = coneMesh
-    // this.coneMesh.position.set(0, 4, 0)
-    // this.coneMesh.scale.set(4, 9, 2)
-    // this.coneMesh.rotation.set(0, 0, 0)
+    this.coneMesh = coneMesh;
+    this.coneMesh.position.set(-3, 0, 0)
+    this.coneMesh.scale.set(1, 1, 1)
+    this.coneMesh.rotation.set(0, 0, 0)
 
-    // this.torusMesh = torusMesh
-    // this.torusMesh.position.set(0, 3, 0)
-    // this.torusMesh.scale.set(4, 10, 7)
-    // this.torusMesh.rotation.set(-Math.PI / 2, 0, 0)
+    this.torusMesh = torusMesh;
+    this.torusMesh.position.set(5, 0, 0)
+    this.torusMesh.scale.set(1, 1, 1)
+    this.torusMesh.rotation.set(0, 0, 0)
 
-    this.torusKMesh = torusKMesh
-    this.torusKMesh.position.set(0, 3, 0)
-    this.torusKMesh.scale.set(1, 4, 2)
+    this.torusKMesh = torusKMesh;
+    this.torusKMesh.position.set(3, 0, 0)
+    this.torusKMesh.scale.set(1, 1, 1)
     this.torusKMesh.rotation.set(0, 0, 0)
 
-    this.planeMesh = planeMesh
-    this.planeMesh.position.set(0, -2, 0)
-    this.planeMesh.scale.set(10, 10, 5)
-    this.planeMesh.rotation.set(-Math.PI / 2, 0, 0) 
-    
-    this.cylinderMesh = cylinderMesh
+    this.planeMesh = planeMesh;
+    this.planeMesh.position.set(0, 0, 0)
+    this.planeMesh.scale.set(1, 1, 1)
+    this.planeMesh.rotation.set(0, 0, 0)
+
+    this.cylinderMesh = cylinderMesh;
     this.cylinderMesh.position.set(0, 0, 0)
-    this.cylinderMesh.scale.set(3, 4, 6)
-    this.cylinderMesh.rotation.set(0, 0, 0) 
+    this.cylinderMesh.scale.set(1, 1, 1)
+    this.cylinderMesh.rotation.set(0, 0, 0)
 
-    this.rendering.scene.add(this.sphereMesh)
-    this.rendering.scene.add(this.coneMesh)
-    this.rendering.scene.add(this.cubeMesh)
-    this.rendering.scene.add(this.planeMesh)
-    this.rendering.scene.add(this.cylinderMesh)
-    this.rendering.scene.add(this.torusMesh)
-    this.rendering.scene.add(this.torusKMesh)
 
+    const spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
+    spotLight.angle = Math.PI / 3
+    spotLight.penumbra = 0.1
+    spotLight.decay = 2
+    spotLight.spotLightPARAMS
+    spotLight.position.set(0, 15, 0)
+
+    const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
+    spotLight.target.position.copy(this.cubeMesh.position);
+
+    spotLight.visible = true
+    spotLight.castShadow = true
+    spotLight.target = boxTarget;
+    spotLight.shadow.mapSize.width= 2048
+    spotLight.shadow.mapSize.height= 2048
+    spotLight.shadow.camera.near= 0.1
+    spotLight.shadow.camera.far= 100
+    spotLight.shadow.focus= 1;
 
 //-----✧ GUI HELPERS 
 
-    const gridHelper = new THREE.GridHelper(0, 0)
+    const gridHelper = new THREE.GridHelper(100, 100)
     const axesHelper = new THREE.AxesHelper()
 
 
@@ -93,19 +127,28 @@ class Demo {
     
 //-----✧ ROTATION
 
-//-----✧ SCENE EVENTS
+//-----✧ SCENE ADD EVENTS
+
+    this.rendering.scene.add(this.sphereMesh)
+    this.rendering.scene.add(this.coneMesh)
+    this.rendering.scene.add(this.cubeMesh)
+    this.rendering.scene.add(this.planeMesh)
+    this.rendering.scene.add(this.cylinderMesh)
+    this.rendering.scene.add(this.torusMesh)
+    this.rendering.scene.add(this.torusKMesh)
 
     //this.rendering.scene.add(dirLight)
-    // this.rendering.scene.add(spotLight)
+    this.rendering.scene.add(spotLight)
     // this.rendering.scene.add(hemiLight)
 
     this.rendering.scene.add(gridHelper)
     //this.rendering.scene.add(axesHelper)
-    //this.rendering.scene.add(dirLightHelper)
+    this.rendering.scene.add(spotLightHelper)
 
 
     this.addEvents()
   }
+  
 
   addEvents() {
     window.addEventListener("resize", this.onResize);
@@ -131,23 +174,29 @@ class Demo {
 
   //---✧ ANIMATION LOOP
 
-    startAnimationLoop() { // This function will be called on every animation frame
-      const animate = (time) => {
-        this.uTime.value += time;
-        this.rendering.render();
-        this.controls.update();
-        requestAnimationFrame(animate)
-    }
+  startAnimationLoop() {
+    const animate = (time) => {
+      this.uTime.value += time;
+      this.rendering.render();
+      
+      // Calculate the time delta (elapsed time since the last frame)
+      const delta = this.clock.getDelta();
+      
+      // Update the camera controls
+      this.cameraControls.update(delta);
+      
+      // Request the next animation frame
+      requestAnimationFrame(animate);
+    };
+  
     // Start the animation loop
-      animate();
+    animate();
   }
 }
 
 let demo = new Demo()
 
 setupControls(paletteKey)
-
-
 
 // //--Parameters for Abstract Base Classes
 

@@ -12,6 +12,9 @@ export const topics =
 [ "water", "air", "rock", "metal", "gas", "plasma", "dust", "ice", "fire", "electricity", "gravity" ],
 [ "iron", "aluminum", "copper", "gold", "silver", "platinum", "titanium", "nickel", "zinc", "lead", "mercury" ],
 [ "granite", "basalt", "shale", "sandstone", "limestone", "marble" ],
+["Convolution", "Kernel", "Edge detection", "Blurring", "Sharpening", "Outlining", "Noise reduction", "Thresholding", "Gradient", "Laplacian", "Sobel", "Gaussian", "Median", "Bilateral", "High-pass", "Low-pass", "Band-pass", "Morphological", "Non-linear", "Adaptive"],
+["Blur", "Sharpen", "Grayscale", "Contrast", "Brightness", "Saturation", "Noise", "Edge", "Denoise", "Emboss", "Threshold", "Invert", "Hue", "Gamma", "Sepia", "Sobel", "Gaussian", "Erosion", "Dilation", "Morphology"],
+["Luminous", "Radiance", "Glow", "Illuminate", "Radiate", "Luminescence", "Brightness", "Shine", "Glare", "Illumination", "Sunlight", "Fluorescent", "Lighthouse", "Glimmer", "Twinkle", "Refraction", "Gleam", "Candlelight", "Ray", "Aurora"],
 [ "plastic", "wood", "metal", "glass", "rubber", "ceramic", "fabric", "paper", "leather", "concrete", "stone" ],
 [ "water", "milk", "juice", "soda", "coffee", "tea", "wine", "beer", "oil", "gasoline", "blood" ],
 [ "circle", "square", "rectangle", "triangle", "cube", "sphere", "cone", "cylinder", "pyramid", "octagon", "pentagon", "hexagon" ],
@@ -21,4 +24,4 @@ export const topics =
 [ "point", "line", "plane", "solid", "angle", "curve", "triangle", "quadrilateral", "polygon", "circle", "sphere", "cone", "cylinder"],
 [ "motion", "force", "acceleration", "gravity", "energy", "momentum", "work", "power", "heat", "temperature", "pressure", "volume" ],
 ["solid", "liquid", "gas", "plasma", "superfluid", "Bose–Einstein condensate", "fermionic condensate", "neutron-degenerate matter", "quark–gluon plasma", "amorphous solid", "liquid crystal", "glass", "crystal", "metal", "insulator", "semiconductor", "superconductor", "ferromagnet", "antiferromagnet", "ferrimagnet", "piezoelectric", "pyroelectric", "ferroelectric", "shape-memory alloy", "metamaterial", "smart material", "biological material", "geological material", "synthetic material"]
- ]
+]
