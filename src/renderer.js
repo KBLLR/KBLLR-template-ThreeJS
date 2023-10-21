@@ -1,5 +1,4 @@
 import * as THREE from "three"
-import { spotLightPARAMS } from "./parameters.js"
 
 export class Rendering {
   constructor(canvas, palette) {
@@ -34,7 +33,7 @@ export class Rendering {
         antialias: true,
         canvas,
         depth: true,
-        alpha: true,
+        alpha: false,
         stencil: false,
         preserveDrawingBuffer: false,
         gammaOutput: false,
@@ -51,8 +50,8 @@ export class Rendering {
 // ✧ TONE MAPPING -- https://offscreencanvas.com/issues/webgl-tone-mapping/
 
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-		this.renderer.toneMappingExposure = 1
-    this.renderer.gammaFactor = 2.2
+		this.renderer.toneMappingExposure = 1.0
+    this.renderer.gammaFactor = 2.1
 
     this.pmremGenerator = new THREE.PMREMGenerator(this.renderer)
     this.pmremGenerator.compileEquirectangularShader()
@@ -62,13 +61,14 @@ export class Rendering {
 // ✧ CAMERA 
 
     this.camera = new THREE.PerspectiveCamera(
-      60,
+      50,
       this.vp.canvas.width / this.vp.canvas.height,
       0.01,
       1000
     );
-    this.camera.position.set(0, 0,8);
-    this.camera.lookAt(0, 0, 0);
+    this.camera.position.set(0, 0, 40)
+    //this.camera.up.set(0, 0, 1)
+    this.camera.lookAt(0, 0, 0)
 
 
   ////////////////////////////////////////////////////////////////
@@ -77,10 +77,10 @@ export class Rendering {
     this.scene = new THREE.Scene();
     this.scene.background = palette.BG.clone()
 
-    // const fogColor = 0xf0f0f0
+    // const fogColor = 0x202533
     // const fogDensity = 0.05
-    // const fogNear = 0.01
-    // const fogFar = 1000
+    // const fogNear = -1
+    // const fogFar = 100
 
     // this.fog = new THREE.FogExp2(fogColor, fogDensity, fogNear, fogFar)
     // this.scene.fog = this.fog

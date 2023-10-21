@@ -2,18 +2,18 @@ import { TextureGenerator } from "./textures.js"
 import * as THREE from 'three'
 
 const textureGenerator = new TextureGenerator()
-textureGenerator.populateElement()
+textureGenerator.updateUITitle()
 
-const myTexture = textureGenerator.g_texture("your-topic", 4)
+const wildMapMisc = textureGenerator.g_texture("your-topic", (2,4))
 
 //------------------------------------------------------------------------------ ◉
 const cubeParams = {
   width: 1,
   height: 1,
-  depth: 10,
+  depth: 1,
   widthSegments: 10,
-  heightSegments: 1,
-  depthSegments: 1,
+  heightSegments: 10,
+  depthSegments: 100,
 }
 const circleParams = {
   radius: 1,
@@ -22,10 +22,10 @@ const circleParams = {
   thetaLength: Math.PI * 2,
 }
 const coneParams = {
-  radius: 1,
-  height: 1,
+  radius: 8,
+  height: 16,
   radialSegments: 32,
-  heightSegments: 1,
+  heightSegments: 16,
   openEnded: false,
 }
 const cylinderParams = {
@@ -39,16 +39,16 @@ const cylinderParams = {
 const planeParams = {
   width: 1,
   height: 1,
-  widthSegments: 1,
-  heightSegments: 1,
+  widthSegments: 100,
+  heightSegments: 100,
 }
 const ringParams = {
-  innerRadius: 0.5,
-  outerRadius: 1,
-  thetaSegments: 32,
+  innerRadius: 50,
+  outerRadius: 0,
+  thetaSegments: 64,
   phiSegments: 1,
-  thetaStart: 0,
-  thetaLength: Math.PI * 2,
+  thetaStart: 1,
+  thetaLength: Math.PI * 2
 }
 const sphereParams = {
   radius: 1,
@@ -61,18 +61,18 @@ const sphereParams = {
 }
 const torusParams = {
   radius: 10,
-  tube: 10.15,
+  tube: 1.15,
   radialSegments: 32,
   tubularSegments: 32,
   arc: Math.PI * 2,
 }
 const torusKParams = {
-  radius: 14,
-  tube: 0.19,
-  radialSegments: 62,
-  tubularSegments: 92,
-  p: 22,
-  q: 53,
+  radius: 10,
+  tube: 4,
+  radialSegments: 24,
+  tubularSegments: 64,
+  p: 8,
+  q: 24,
   heightScale: 10,
 }
 //------------------------------------------------------------------------------ ◉
@@ -152,31 +152,26 @@ const spriteG = new THREE.Sprite(spriteParams)
 
 //------------------------------------------------------------------------------ ◉
 
-//------------------------------------------------------------------------------ ◉
-
-const wildMapMisc = textureGenerator.g_texture(textureGenerator.wildCard, 4)
-
-//------------------------------------------------------------------------------ ◉
 const MeshPhysicalMaterialParameters = {
-  attenuationDistance: 10.0,
+  attenuationDistance: 1.0,
   emissive: 0x000,
   emissiveIntensity: 1.0,
-  aoMapIntensity: 1.0,
-  envMapIntensity: 2,
-  reflectivity: 1.2,
-  normalScale: new THREE.Vector2(4, 4),
+  aoMapIntensity: 0.2,
+  envMapIntensity: 1.0,
+  reflectivity: 0.5,
+  normalScale: new THREE.Vector2(-1.0, 1.0),
   metalness: 0.05,
   roughness: 0.3,
   sheen: 0.4,
   sheenRoughness: 0.1,
   transmission:1.0,
-  ior: 2.0,
+  ior: 1.44,
   opacity: 1.0,
-  clearcoat: 0.8,
+  clearcoat: 0.5,
   clearcoatRoughness: 0.1,
-  clearcoatNormalScale: new THREE.Vector2(0.2, 0.2),
+  clearcoatNormalScale: new THREE.Vector2(-0.1, 0.1),
   displacementScale: 0.9,
-  displacementBias: 0.3,
+  displacementBias: -0.9,
   flatShading: false,
   side: THREE.DoubleSide,
   transparent: true,
@@ -262,7 +257,7 @@ const MeshPhongMaterialParams = {
 
 const MeshStandardMaterialParameters = {
   emissive: 0x000,
-  emissiveIntensity: 0.5,
+  emissiveIntensity: 1.0,
   aoMapIntensity: 1.0,
   envMapIntensity: 2,
   normalScale: new THREE.Vector2(4, 4),
@@ -286,6 +281,26 @@ const MeshStandardMaterialParams = {
 }
 
 //------------------------------------------------------------------------------ ◉
+
+export function updateMeshes(wildMapMisc) {
+  // Update your material parameters with the new texture maps
+  MeshPhysicalMaterialParams.map = wildMapMisc;
+  MeshPhysicalMaterialParams.emissiveMap = wildMapMisc;
+  MeshPhysicalMaterialParams.aoMap = wildMapMisc;
+  MeshPhysicalMaterialParams.envMap = wildMapMisc;
+  MeshPhysicalMaterialParams.normalMap = wildMapMisc;
+  MeshPhysicalMaterialParams.metalnessMap = wildMapMisc;
+  MeshPhysicalMaterialParams.roughnessMap = wildMapMisc;
+  MeshPhysicalMaterialParams.displacementMap = wildMapMisc;
+  MeshPhysicalMaterialParams.clearcoatNormalMap = wildMapMisc;
+  MeshPhysicalMaterialParams.sheenColorMap = wildMapMisc;
+  // Update your materials with the modified parameters
+  sphereMesh.material = new THREE.MeshPhysicalMaterial(MeshPhysicalMaterialParams);
+  // Update other meshes similarly
+}
+//------------------------------------------------------------------------------ ◉
+
+//------------------------------------------------------------------------------ ◉
 const MeshStandardMaterial = new THREE.MeshStandardMaterial(MeshStandardMaterialParams)
 const MeshPhongMaterial = new THREE.MeshPhongMaterial(MeshPhongMaterialParams)
 const MeshLambertMaterial = new THREE.MeshLambertMaterial(MeshLambertMaterialParams)
@@ -301,4 +316,5 @@ export const cylinderMesh = new THREE.Mesh(cylinderG, MeshLambertMaterial)
 export const coneMesh = new THREE.Mesh(coneG, MeshStandardMaterial)
 export const torusMesh = new THREE.Mesh(torusG, MeshPhysicalMaterial)
 export const planeMesh = new THREE.Mesh(planeG, MeshBasicMaterial)
+export const ringMesh = new THREE.Mesh(ringG, MeshBasicMaterial)
 //------------------------------------------------------------------------------ ◉

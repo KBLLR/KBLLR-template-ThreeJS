@@ -32,26 +32,34 @@
     <!-- UI TITLES -->
     <div class="ui">
       <div id="result-element">Berlin,10.2023</div>
-      <h4 class="ui-Col-Title">KBLLR.graphics</h4>
+      <h4 id="ui-col-title">KBLLR.graphics</h4>
       <h3 id="ui-title">DEMO-TITLE</h3>
     </div>
 
     <!-- UI INPUTS -->
     <div id="ui-bar-wraper">
-      <div id="ui-bar">
-        <div class="left">
-          <button id="generateRandomWord">Random Inspiration</button>
-        </div>
-        <div class="middle">
-          <input type="text" id="inputWord" placeholder="Dare to dream">
-        </div>
-        <div class="right">
-            <button id="sendWord">Send</button>
-        </div>
-        </div>
+      <div class="left">
+        <button id="generateRandomWord">Random Inspiration</button>
       </div>
+      <div class="middle">
+        <input type="text" id="inputWord" placeholder="Dare to dream">
+        <div id="suggestions"></div>
+      </div>
+      <div class="right">
+        <button id="sendWord">Send</button>
+      </div>
+    </div>
 
-
+    <!-- UI MENU -->
+    <nav>
+      <div class="menu-item" id="logo">KNIGHT</div>
+      <div class="menu-item" id="projects">Projects</div>
+      <div class="menu-item" id="tools">Tools</div>
+      <div class="menu-item" id="blog">Blog</div>
+      <div class="menu-item" id="lab">Lab</div>
+      <div class="menu-item" id="about">About</div>
+      <div class="menu-item" id="contact">Contact</div>
+    </nav>
 
     <!-- Debug -->
     <div class="data-layout-C">
@@ -72,6 +80,7 @@
       <div class="row" id="debug,--6"></div>
     </div>  
   
+    <script type="module" src="./src/textures.js"></script>
     <script type="module" src="./src/app.js"></script>
   </body>
 </html>

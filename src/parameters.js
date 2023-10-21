@@ -113,8 +113,8 @@ export const controlPARAMS = {
 export const spotLightPARAMS = {
     map: 'g_texture(wildCard, 2)',
     color: 0xffffff,
-    intensity: 4,
-    distance: 50,
+    intensity: 8,
+    distance: 20,
     angle: Math.PI / 2.1,
     penumbra: 1,
     decay: 2,
@@ -124,11 +124,11 @@ export const spotLightPARAMS = {
     radius: 4,
   }
   
-export const hemiLightPARAMS = {
-  // skyColor: hemiLightCategory.skyC,
-  // groundColor: hemiLightCategory.groundC,
-  intensity: 0.05,
-}
+// export const hemiLightPARAMS = {
+//   skyColor: hemiLightCategory.skyC,
+//   groundColor: hemiLightCategory.groundC,
+//   intensity: 0.05,
+// }
 
 
 

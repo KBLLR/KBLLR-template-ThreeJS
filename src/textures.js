@@ -1,48 +1,25 @@
-import * as THREE from "three"
-import { topics } from "./data/topics.js"
-
+import * as THREE from 'three'
+import { collectionTitles, topics } from './data/data.js'
 
 class TextureGenerator {
   constructor() {
-    this.uiTitle = document.getElementById("ui-title")
-    this.uiColTitle = document.getElementById("ui-Col-Title")
-    this.Template = "https://unsplash.com/photos/QwoNAhbmLLo"
-    this.anisotropyLevel = 16
-    this.wildCard = null
-    this.currentTopicIndex = 0
-
-    this.collectionTitles = [
-      "Cosmic Wonders",
-      "Vivid Hues",
-      "Textured Realms",
-      "Substance Universe",
-      "Metallic Marvels",
-      "Rock Solid",
-      "Material Worlds",
-      "Liquid Dreams",
-      "Geometric Poetry",
-      "Pattern Parade",
-      "Fractal Odyssey",
-      "Geometry Gazette",
-      "Physics Phenomena",
-      "Material States",
-      "Gaseous Marvels",
-      "Substances of Wonder",
-      "Melodic Metals",
-      "Rocks and Minerals",
-      "Masterful Materials",
-      "Luscious Liquids",
-      "Shapes and Shadows",
-      "Patterns in Time",
-    ]
+    this.uiTitle = document.getElementById("ui-title");
+    this.uiColTitle = document.getElementById("ui-col-title");
+    this.Template = "https://unsplash.com/photos/QwoNAhbmLLo";
+    this.anisotropyLevel = 16;
+    this.wildCard = null;
+    this.currentTopicIndex = 0;
   }
+
   updateUITitle() {
-    const currentCollection = this.collectionTitles[this.currentTopicIndex]
-    this.uiTitle.textContent = currentCollection;
+    // Choose a random index within the range of available collections
+    this.currentTopicIndex = Math.floor(Math.random() * collectionTitles.length);
     
-    const randomWordElement = document.getElementById("random-word");
+    const currentCollection = collectionTitles[this.currentTopicIndex];
+    this.uiTitle.textContent = currentCollection;
+
     const randomWord = this.getRandomWordFromCollection(currentCollection);
-    randomWordElement.textContent = randomWord;
+    this.uiColTitle.textContent = randomWord;
   }
 
   getRandomTopic() {
@@ -54,26 +31,35 @@ class TextureGenerator {
     return topicArray[Math.floor(Math.random() * topicArray.length)];
   }
 
-  populateElement() {
-    this.wildCard = this.getRandomTopic();
-    if (this.wildCard) {
-      this.uiTitle.textContent = this.wildCard;
+  getRandomWordFromCollection(collectionTitle) {
+    const collectionIndex = collectionTitles.indexOf(collectionTitle);
+    if (collectionIndex === -1) {
+      console.error("Collection title not found.");
+      return null;
     }
+    const topicArray = topics[collectionIndex];
+    if (!topicArray || topicArray.length === 0) {
+      console.error("Invalid or empty topic array.");
+      return null;
+    }
+    return topicArray[Math.floor(Math.random() * topicArray.length)];
   }
 
-  g_texture(wildcard = "topic", repeat = 2) {
-    const path = `https://source.unsplash.com/random/?${wildcard}`
+  g_texture(wildcard = "topic", repeat = (2,4)) {
+    const path = `https://source.unsplash.com/random/?${wildcard}`;
     const preload = new THREE.TextureLoader().load(
       path ? path : this.Template,
       (e) => {
-        e.mapping = THREE.EquirectangularRefractionMapping
-        e.anisotropy = this.anisotropyLevel
-        e.magFilter = THREE.NearestFilter
-        e.minFilter = THREE.LinearMipmapLinearFilter
-        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping
+        e.mapping = THREE.EquirectangularRefractionMapping;
+        e.anisotropy = this.anisotropyLevel;
+        e.magFilter = THREE.NearestFilter;
+        e.minFilter = THREE.LinearMipmapLinearFilter;
+        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping;
         e.type = THREE.HalfFloatType;
         e.format = THREE.RGBAFormat;
         e.repeat.set(repeat, repeat);
+        e.generateMipmaps = true;
+        e.needsUpdate = true;
         e.dispose();
       }
     );

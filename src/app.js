@@ -1,11 +1,13 @@
-import "./style.css"
-import * as THREE from "three"
+import * as THREE from 'three'
 import CameraControls from 'camera-controls'
-import { Rendering } from "./renderer.js"
-import { palettes, sinPalettes, hemiLightColors } from "./palette.js"
-import { getPaletteFromParams, setupControls } from "./utils.js"
-import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh } from "./meshes.js";
-import loadingManager from "./manager.js"
+import { Rendering } from './renderer.js'
+import { TextureGenerator } from './textures.js'
+import { updateMeshes } from './meshes.js'
+import { SearchBarUI } from './searchBarUI.js'
+import { palettes, sinPalettes, hemiLightColors } from './palette.js'
+import { getPaletteFromParams, setupControls } from './utils.js'
+import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh, ringMesh } from './meshes.js'
+import './style.css'
 
 CameraControls.install( { THREE } )
 
@@ -14,6 +16,18 @@ CameraControls.install( { THREE } )
 let paletteKey = getPaletteFromParams("blue")
 let palette = palettes[paletteKey]
 let sinPalette = sinPalettes[paletteKey]
+
+const textureGenerator = new TextureGenerator(); 
+
+const searchBarUI = new SearchBarUI()
+searchBarUI.init()
+
+// Handle the "Random Inspiration" button click to update the meshes
+const randomInspirationButton = document.getElementById("generateRandomWord");
+randomInspirationButton.addEventListener("click", () => {
+  searchBarUI.updateTextureAndMesh(); // Update the UI title in the SearchBarUI
+  updateMeshes(); // Update the meshes in the app.js
+});
 
 ////////////////////////////////////////////////////////////////
 // ✧ MAIN CLASS - DEMO APP                                     /
@@ -36,14 +50,7 @@ class Demo {
 
     this.cameraControls.enabled = true
 
-
-    console.log(
-      this.cameraControls.active, 
-      this.cameraControls.currentAction,
-      this.cameraControls.distance,
-      this.cameraControls.minDistance,
-      )
-
+  
 //----------☞ TARGETS 
 
     const boxTarget = new THREE.Object3D();
@@ -53,46 +60,59 @@ class Demo {
     ////////////////////////////////////////////////////////////////
 // ✧ LIGHTS
 
-    // this.hemiLight = new THREE.HemisphereLight(hemiLightPARAMS)
-    //this.ambientLight = new THREE.AmbientLight(palette.highlight, 0.8)
-
+    const hemiLight = new THREE.HemisphereLight(hemiLightColors.space.skyC, hemiLightColors.space.groundC, 10.5)
+    hemiLight.position.set(0, 5, 0)
+    hemiLight.visible = true
 
 //------------ MESHES 
 
-    this.sphereMesh = sphereMesh;
+    this.sphereMesh = sphereMesh
     this.sphereMesh.position.set(0, 0, 0)
-    this.sphereMesh.scale.set(1, 1, 1)
+    this.sphereMesh.scale.set(8, 8, 8)
     this.sphereMesh.rotation.set(0, 0, 0)
+    this.sphereMesh.visible = false
 
-    this.cubeMesh = cubeMesh;
-    this.cubeMesh.position.set(-5, 0, 0)
-    this.cubeMesh.scale.set(1, 1, 1)
+    this.ringMesh = ringMesh
+    this.ringMesh.position.set(0, 0, 0)
+    this.ringMesh.scale.set(8, 8, 8)
+    this.ringMesh.rotation.set(0, 0, 0)
+    this.ringMesh.visible = false
+
+    this.cubeMesh = cubeMesh
+    this.cubeMesh.position.set(0, 0, 0)
+    this.cubeMesh.scale.set(4, 4, 4)
     this.cubeMesh.rotation.set(0, 0, 0)
+    this.cubeMesh.visible = false
 
-    this.coneMesh = coneMesh;
-    this.coneMesh.position.set(-3, 0, 0)
+    this.coneMesh = coneMesh
+    this.coneMesh.position.set(0, 0, 0)
     this.coneMesh.scale.set(1, 1, 1)
     this.coneMesh.rotation.set(0, 0, 0)
+    this.coneMesh.visible = false
 
-    this.torusMesh = torusMesh;
-    this.torusMesh.position.set(5, 0, 0)
+    this.torusMesh = torusMesh
+    this.torusMesh.position.set(0, 0, 0)
     this.torusMesh.scale.set(1, 1, 1)
     this.torusMesh.rotation.set(0, 0, 0)
+    this.torusMesh.visible = false
 
-    this.torusKMesh = torusKMesh;
-    this.torusKMesh.position.set(3, 0, 0)
+    this.torusKMesh = torusKMesh
+    this.torusKMesh.position.set(0, 0, 0)
     this.torusKMesh.scale.set(1, 1, 1)
     this.torusKMesh.rotation.set(0, 0, 0)
+    this.torusKMesh.visible = false
 
-    this.planeMesh = planeMesh;
+    this.planeMesh = planeMesh
     this.planeMesh.position.set(0, 0, 0)
-    this.planeMesh.scale.set(1, 1, 1)
-    this.planeMesh.rotation.set(0, 0, 0)
+    this.planeMesh.scale.set(9, 16, 0)
+    this.planeMesh.rotation.set(0, 0, 0) //.rotation.x = -Math.PI / 2
+    this.planeMesh.visible = true
 
-    this.cylinderMesh = cylinderMesh;
+    this.cylinderMesh = cylinderMesh
     this.cylinderMesh.position.set(0, 0, 0)
     this.cylinderMesh.scale.set(1, 1, 1)
     this.cylinderMesh.rotation.set(0, 0, 0)
+    this.cylinderMesh.visible = false
 
 
     const spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
@@ -100,10 +120,10 @@ class Demo {
     spotLight.penumbra = 0.1
     spotLight.decay = 2
     spotLight.spotLightPARAMS
-    spotLight.position.set(0, 15, 0)
+    spotLight.position.set(0, 50, 0)
 
     const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
-    spotLight.target.position.copy(this.cubeMesh.position);
+    spotLightHelper.visible = false
 
     spotLight.visible = true
     spotLight.castShadow = true
@@ -114,16 +134,49 @@ class Demo {
     spotLight.shadow.camera.far= 100
     spotLight.shadow.focus= 1;
 
+    console.log(
+      this.cameraControls.active, 
+      this.cameraControls.currentAction,
+      this.cameraControls.distance,
+      this.cameraControls.minDistance,
+      this.cameraControls.maxDistance,
+      this.cameraControls.minZoom,
+      this.cameraControls.maxZoom,
+      this.cameraControls.polarAngle,
+      this.cameraControls.minPolarAngle,
+      this.cameraControls.maxPolarAngle,
+      this.cameraControls.azimuthAngle,
+      this.cameraControls.minAzimuthAngle,
+      this.cameraControls.maxAzimuthAngle,
+      this.cameraControls.boundaryEnclosesCamera = true,
+      this.cameraControls.boundaryFriction,
+      this.cameraControls.smoothTime = 0.5,
+      this.cameraControls.draggingSmoothTime = 0.5,
+      this.cameraControls.azimuthRotateSpeed = 0.5,
+      this.cameraControls.polarRotateSpeed = 0.5,
+      this.cameraControls.dollySpeed = 0.5,
+      this.cameraControls.truckSpeed = 0.5,
+      this.cameraControls.dollyToCursor = false,
+      this.cameraControls.verticalDragToForward = true,
+      this.cameraControls.colliderMeshes = []
+      )
+
+
 //-----✧ GUI HELPERS 
 
     const gridHelper = new THREE.GridHelper(100, 100)
+    gridHelper.position.y = -0.01
+    gridHelper.rotation.x = -Math.PI / 2
+    gridHelper.material.opacity = 0
+    gridHelper.material.transparent = true
+
     const axesHelper = new THREE.AxesHelper()
 
 
 //-----✧ POSITION
 
     //axesHelper.position.set(0, 0, 0)
-    gridHelper.position.y = -2
+    gridHelper.position.y = 0
     
 //-----✧ ROTATION
 
@@ -136,10 +189,11 @@ class Demo {
     this.rendering.scene.add(this.cylinderMesh)
     this.rendering.scene.add(this.torusMesh)
     this.rendering.scene.add(this.torusKMesh)
+    this.rendering.scene.add(this.ringMesh)
 
     //this.rendering.scene.add(dirLight)
     this.rendering.scene.add(spotLight)
-    // this.rendering.scene.add(hemiLight)
+    this.rendering.scene.add(hemiLight)
 
     this.rendering.scene.add(gridHelper)
     //this.rendering.scene.add(axesHelper)
