@@ -45,8 +45,30 @@ class TextureGenerator {
     return topicArray[Math.floor(Math.random() * topicArray.length)];
   }
 
-  g_texture(wildcard = "topic", repeat = (2,4)) {
-    const path = `https://source.unsplash.com/random/?${wildcard}`;
+  i_texture(wildcard = "topic", repeat = (1,4) ) {
+    const path = `https://source.unsplash.com/random/?${wildcard}`
+    const preload = new THREE.TextureLoader().load(
+      path ? path : this.Template,
+      (e) => {
+        e.mapping = THREE.EquirectangularRefractionMapping;
+        e.anisotropy = this.anisotropyLevel;
+        e.magFilter = THREE.NearestFilter;
+        e.minFilter = THREE.LinearMipmapLinearFilter;
+        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping;
+        e.type = THREE.HalfFloatType;
+        e.format = THREE.RGBAFormat;
+        e.repeat.set(repeat, repeat);
+        e.generateMipmaps = true;
+        e.needsUpdate = true;
+        e.dispose();
+      }
+    );
+    console.log(preload);
+    return preload;
+  }
+
+  g_texture(wildcard = "topic", repeat = (4,16)) {
+    const path = `https://source.unsplash.com/random/?${wildcard}`
     const preload = new THREE.TextureLoader().load(
       path ? path : this.Template,
       (e) => {

@@ -1,8 +1,15 @@
 import * as THREE from "three"
+import { TextureGenerator } from './textureGenerator.js'
+import { initializeMeshes, updateMeshes } from './meshes.js'
+import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh, ringMesh } from './meshes.js'
+import CameraControls from "camera-controls";
 
 export class Rendering {
-  constructor(canvas, palette) {
-    this.canvas = canvas;
+  constructor(canvas, palette, textureGenerator) {
+    this.canvas = canvas
+    this.textureGenerator = new TextureGenerator(); // Initialize TextureGenerator here
+    this.textureGenerator.updateUITitle(); // Optionally, update the UI title if needed
+
     let hex = "#"+ palette.highlight.getHexString()
     document.documentElement.style.setProperty("--text", hex);
 
@@ -70,6 +77,8 @@ export class Rendering {
     //this.camera.up.set(0, 0, 1)
     this.camera.lookAt(0, 0, 0)
 
+    this.camera.updateMatrixWorld()
+    this.camera.updateProjectionMatrix()
 
   ////////////////////////////////////////////////////////////////
 // ✧ SCENE
@@ -122,29 +131,31 @@ export class Rendering {
   init() {
 
   }
-
-   update() {
-   // this.ambientLight.color.getHex
-   }
+  update() {
+    const newTexture = this.textureGenerator.g_texture(this.textureGenerator.wildCard, 16)
+    planeMesh.material.map = newTexture
+  
+    this.render()
+  }
 
   render() {
-    this.renderer.render(this.scene, this.camera);
+    this.renderer.render(this.scene, this.camera)
   }
 
   onResize = () => {
     let canvas = this.canvas
-    this.vp.canvas.width = canvas.offsetWidth;
-    this.vp.canvas.height = canvas.offsetHeight;
-    this.vp.canvas.dpr = Math.min(window.devicePixelRatio, 2);
+    this.vp.canvas.width = canvas.offsetWidth
+    this.vp.canvas.height = canvas.offsetHeight
+    this.vp.canvas.dpr = Math.min(window.devicePixelRatio, 2)
 
-    this.vp.scene.width = window.innerWidth;
-    this.vp.scene.height = window.innerHeight;
+    this.vp.scene.width = window.innerWidth
+    this.vp.scene.height = window.innerHeight
 
-    this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false);
-    this.camera.aspect = this.vp.canvas.width / this.vp.canvas.height;
-    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false)
+    this.camera.aspect = this.vp.canvas.width / this.vp.canvas.height
+    this.camera.updateProjectionMatrix()
 
-    this.vp.scene = this.getViewSizeAtDepth();
+    this.vp.scene = this.getViewSizeAtDepth()
   }
 }
 
