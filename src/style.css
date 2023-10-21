@@ -166,6 +166,23 @@ nav {
   text-align: center;
 }
 
+.menu-item {
+  background-color: hsla(0, 0%, 19%, 0.193);
+  color: hsla(0, 0%, 100%, 0.8);
+  border-radius: 4px;
+  padding: 0 0.5%;
+  transition: all 0.3s; /* Add a smooth transition to all properties */
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: hsla(0, 0%, 19%, 0.5); /* Change the background color on hover */
+  color: hsla(0, 0%, 100%, 1); /* Change the text color on hover */
+  border-radius: 4px;
+  padding: 0 0.5%;
+  cursor: pointer; /* Change the cursor to a pointer on hover (optional) */
+}
+
 .ui {
   position: fixed;
   z-index: 100000;
@@ -247,10 +264,11 @@ nav {
   background-color: hsla(0, 0%, 19%, 0.193);
   border-radius: 4px;
   color:hsla(0, 0%, 100%,0.8);
-  font-family: 'pirulen';
+  font-family: 'Roboto-Regular';
   font-size: 0.4rem;
   text-align: center;
 }
+
 ui-bar {
   display: flex;
   flex-flow: row nowrap;
