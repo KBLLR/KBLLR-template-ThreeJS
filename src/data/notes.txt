@@ -260,6 +260,15 @@ Simple shapes
 Low-poly models
 
 ***
+------------------------------------------------------------------------------ ◉
+# COLOR SPACE - COLOR MANAGEMENT - Linear sRGBA - sRGBA
+https://threejs.org/docs/#manual/en/introduction/Color-management
+https://en.wikipedia.org/wiki/RGB_color_space
+https://en.wikipedia.org/wiki/Gamma_correction
+https://libpng.org/pub/png/spec/1.2/PNG-GammaAppendix.html
+https://poynton.com/notes/colour_and_gamma/GammaFAQ.html 
+https://stackoverflow.com/questions/12524623/what-are-the-practical-differences-when-working-with-colors-in-a-linear-vs-a-no/12894053#12894053
+https://developer.nvidia.com/gpugems/gpugems3/part-iv-image-effects/chapter-24-importance-being-linears
 
 ------------------------------------------------------------------------------ ◉
 # FILTERS
