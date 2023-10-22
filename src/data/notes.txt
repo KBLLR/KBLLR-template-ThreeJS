@@ -274,8 +274,7 @@ https://developer.nvidia.com/gpugems/gpugems3/part-iv-image-effects/chapter-24-i
 # FILTERS
 
 ### Anisotropic Filtering:
-
-In layman's terms, anisotropic filtering retains the "sharpness" of a texture normally lost by MIP map texture's attempts to avoid aliasing. Anisotropic filtering can therefore be said to maintain crisp texture detail at all viewing orientations while providing fast anti-aliased texture filtering.
+Retains the "sharpness" of a texture normally lost by MIP map texture's attempts to avoid aliasing. Anisotropic filtering can therefore be said to maintain crisp texture detail at all viewing orientations while providing fast anti-aliased texture filtering.
 
 Example: https://threejs.org/examples/?q=anisotropy#webgl_materials_texture_anisotropy
 Wikipedia: https://en.wikipedia.org/wiki/Anisotropic_filtering
@@ -288,12 +287,24 @@ https://threejs.org/docs/#api/en/textures
 https://learnopengl.com/Advanced-OpenGL/Cubemaps
 
 ------------------------------------------------------------------------------ ◉
+# PBR 
+
+https://lousodrome.net/blog/light/2011/12/27/readings-on-physically-based-rendering/
+https://marmoset.co/posts/physically-based-rendering-and-you-can-too/
+
+------------------------------------------------------------------------------ ◉
 # THREEJS
 https://threejs
 https://threejs.org/docs/#api/en/constants/Textures
 https://threejs.org/docs/#api/geometries/BoxGeometry
 https://threejs.org/docs/#api
 https://discourse.threejs.org/t/three-js-bookshelf/2468
+
+------------------------------------------------------------------------------ ◉
+# COURSES 
+
+### SIGRAPH 2017 Course: Physically Based Shading in Theory and Practice 
+https://blog.selfshadow.com/publications/s2017-shading-course/
 
 ------------------------------------------------------------------------------ ◉
 # GITHUB Repos    
