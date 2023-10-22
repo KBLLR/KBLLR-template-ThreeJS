@@ -1,7 +1,6 @@
 import * as THREE from "three"
 import { TextureGenerator } from './textureGenerator.js'
 import { initializeMeshes, updateMeshes } from './meshes.js'
-import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh, ringMesh } from './meshes.js'
 import CameraControls from "camera-controls";
 
 export class Rendering {
@@ -43,7 +42,7 @@ export class Rendering {
         alpha: false,
         stencil: false,
         preserveDrawingBuffer: false,
-        gammaOutput: false,
+        gammaOutput: true,
     });
 
     this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false)

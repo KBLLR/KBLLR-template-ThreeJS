@@ -267,6 +267,7 @@ nav {
   font-family: 'Roboto-Regular';
   font-size: 0.4rem;
   text-align: center;
+  display: none;
 }
 
 ui-bar {

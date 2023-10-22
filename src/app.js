@@ -2,12 +2,11 @@ import * as THREE from 'three'
 import CameraControls from 'camera-controls'
 import { Rendering } from './renderer.js'
 import { TextureGenerator } from './textureGenerator.js'
-import { collectionTitles, topics } from './data/data.js'
 import { initializeMeshes, updateMeshes } from './meshes.js'
 import { SearchBarUI } from './searchBarUI.js'
 import { palettes, sinPalettes, hemiLightColors } from './palette.js'
 import { getPaletteFromParams, setupControls } from './utils.js'
-import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh, ringMesh } from './meshes.js'
+import { torusKMesh, sphereMesh, cubeMesh,cylinderMesh,coneMesh,torusMesh,planeMesh,ringMesh} from './meshes.js'
 import './style.css'
 
 CameraControls.install( { THREE } )
@@ -22,8 +21,6 @@ let sinPalette = sinPalettes[paletteKey]
 const searchBarUI = new SearchBarUI()
 searchBarUI.init()
 
-const randomInspirationButton = document.getElementById("generateRandomWord");
-
 
 ////////////////////////////////////////////////////////////////
 // ✧ MAIN CLASS - DEMO APP                                     /
@@ -31,34 +28,101 @@ const randomInspirationButton = document.getElementById("generateRandomWord");
 
 class Demo {
     constructor() {
-      this.textureGenerator = new TextureGenerator(); // Initialize TextureGenerator here
-      this.textureGenerator.updateUITitle(); // Optionally, update the UI title if needed
-  
-      this.rendering = new Rendering(document.querySelector("#canvas"), palette, this.textureGenerator);
-      this.cameraControls = new CameraControls(this.rendering.camera, this.rendering.canvas);
-      this.uTime = new THREE.Uniform(0);
-      this.clock = new THREE.Clock();
-      this.init();
+      this.textureGenerator = new TextureGenerator()
+      this.textureGenerator.updateUITitle()
+
+      this.planeMesh = planeMesh
+      this.sphereMesh = sphereMesh
+      this.ringMesh = ringMesh
+      this.cubeMesh = cubeMesh
+      this.coneMesh = coneMesh
+      this.torusMesh = torusMesh
+      this.torusKMesh = this.torusKMesh
+
+      this.rendering = new Rendering(document.querySelector("#canvas"), palette, this.textureGenerator)
+      this.cameraControls = new CameraControls(this.rendering.camera, this.rendering.canvas)
+      this.uTime = new THREE.Uniform(0)
+      this.clock = new THREE.Clock()
+      this.startAnimationLoop()
+      this.init()
     }
 
   init(){
 
-    this.textureGenerator = new TextureGenerator(); // Initialize TextureGenerator here
-    this.textureGenerator.updateUITitle(); // Optionally, update the UI title if needed
 
-    const initMeshes = new initializeMeshes()
+
 
     // Add click event to the button for updating the picture
-    randomInspirationButton.addEventListener("click", () => {
     const newTexture = this.textureGenerator.g_texture(this.textureGenerator.wildCard, 16);
-    planeMesh.material.map = newTexture;
-    this.rendering.render();
-    });
+    const initMeshes = new initializeMeshes(torusKMesh, sphereMesh, cubeMesh,cylinderMesh,coneMesh,torusMesh,planeMesh,ringMesh)
+
+    initMeshes.sphereMesh.position.set(0, 0, 0)
+    this.sphereMesh.scale.set(8, 8, 8)
+    this.sphereMesh.rotation.set(0, 0, 0)
+    this.sphereMesh.visible = true
+
+    this.ringMesh.position.set(0, 0, 0)
+    this.ringMesh.scale.set(8, 8, 8)
+    this.ringMesh.rotation.set(0, 0, 0)
+    this.ringMesh.visible = false
+
+    this.cubeMesh.position.set(0, 0, 0)
+    this.cubeMesh.scale.set(4, 4, 4)
+    this.cubeMesh.rotation.set(0, 0, 0)
+    this.cubeMesh.visible = false
+
+    this.coneMesh.position.set(0, 0, 0)
+    this.coneMesh.scale.set(1, 1, 1)
+    this.coneMesh.rotation.set(0, 0, 0)
+    this.coneMesh.visible = false
+
+    this.torusMesh.position.set(0, 0, 0)
+    this.torusMesh.scale.set(1, 1, 1)
+    this.torusMesh.rotation.set(0, 0, 0)
+    this.torusMesh.visible = false
+
+
+    this.torusKMesh.position.set(0, 0, 0)
+    this.torusKMesh.scale.set(1, 1, 1)
+    this.torusKMesh.rotation.set(0, 0, 0)
+    this.torusKMesh.visible = false
+
+
+    this.cylinderMesh.position.set(0, 0, 0)
+    this.cylinderMesh.scale.set(1, 1, 1)
+    this.cylinderMesh.rotation.set(0, 0, 0)
+    this.cylinderMesh.visible = false
 
 
 //----------☞ CONTROLS
 
     this.cameraControls.enabled = true
+    this.cameraControls.active, 
+    this.cameraControls.currentAction,
+    this.cameraControls.distance,
+    this.cameraControls.minDistance,
+    this.cameraControls.maxDistance,
+    this.cameraControls.minZoom,
+    this.cameraControls.maxZoom,
+    this.cameraControls.polarAngle,
+    this.cameraControls.minPolarAngle,
+    this.cameraControls.maxPolarAngle,
+    this.cameraControls.azimuthAngle,
+    this.cameraControls.minAzimuthAngle,
+    this.cameraControls.maxAzimuthAngle,
+    this.cameraControls.boundaryEnclosesCamera = true,
+    this.cameraControls.boundaryFriction,
+    this.cameraControls.smoothTime = 0.5,
+    this.cameraControls.draggingSmoothTime = 0.5,
+    this.cameraControls.azimuthRotateSpeed = 0.5,
+    this.cameraControls.polarRotateSpeed = 0.5,
+    this.cameraControls.dollySpeed = 0.5,
+    this.cameraControls.truckSpeed = 0.5,
+    this.cameraControls.dollyToCursor = false,
+    this.cameraControls.verticalDragToForward = true,
+    this.cameraControls.colliderMeshes = []
+    
+
 
   
 //----------☞ TARGETS 
@@ -76,53 +140,6 @@ class Demo {
 
 //------------ MESHES 
 
-    this.sphereMesh = sphereMesh
-    this.sphereMesh.position.set(0, 0, 0)
-    this.sphereMesh.scale.set(8, 8, 8)
-    this.sphereMesh.rotation.set(0, 0, 0)
-    this.sphereMesh.visible = false
-
-    this.ringMesh = ringMesh
-    this.ringMesh.position.set(0, 0, 0)
-    this.ringMesh.scale.set(8, 8, 8)
-    this.ringMesh.rotation.set(0, 0, 0)
-    this.ringMesh.visible = false
-
-    this.cubeMesh = cubeMesh
-    this.cubeMesh.position.set(0, 0, 0)
-    this.cubeMesh.scale.set(4, 4, 4)
-    this.cubeMesh.rotation.set(0, 0, 0)
-    this.cubeMesh.visible = false
-
-    this.coneMesh = coneMesh
-    this.coneMesh.position.set(0, 0, 0)
-    this.coneMesh.scale.set(1, 1, 1)
-    this.coneMesh.rotation.set(0, 0, 0)
-    this.coneMesh.visible = false
-
-    this.torusMesh = torusMesh
-    this.torusMesh.position.set(0, 0, 0)
-    this.torusMesh.scale.set(1, 1, 1)
-    this.torusMesh.rotation.set(0, 0, 0)
-    this.torusMesh.visible = false
-
-    this.torusKMesh = torusKMesh
-    this.torusKMesh.position.set(0, 0, 0)
-    this.torusKMesh.scale.set(1, 1, 1)
-    this.torusKMesh.rotation.set(0, 0, 0)
-    this.torusKMesh.visible = false
-
-    this.planeMesh = planeMesh
-    this.planeMesh.position.set(0, 0, 0)
-    this.planeMesh.scale.set(9, 16, 0)
-    this.planeMesh.rotation.set(0, 0, 0) //.rotation.x = -Math.PI / 2
-    this.planeMesh.visible = true
-
-    this.cylinderMesh = cylinderMesh
-    this.cylinderMesh.position.set(0, 0, 0)
-    this.cylinderMesh.scale.set(1, 1, 1)
-    this.cylinderMesh.rotation.set(0, 0, 0)
-    this.cylinderMesh.visible = false
 
     const spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
     spotLight.angle = Math.PI / 3
@@ -190,12 +207,13 @@ class Demo {
 //-----✧ SCENE ADD EVENTS
 
     this.rendering.scene.add(this.sphereMesh)
+    this.rendering.render(this.planeMesh)
     this.rendering.scene.add(this.coneMesh)
     this.rendering.scene.add(this.cubeMesh)
-    this.rendering.scene.add(this.planeMesh)
     this.rendering.scene.add(this.cylinderMesh)
     this.rendering.scene.add(this.torusMesh)
     this.rendering.scene.add(this.torusKMesh)
+    this.rendering.scene.add(this.ringMesh)
     this.rendering.scene.add(this.ringMesh)
 
     //this.rendering.scene.add(dirLight)
@@ -219,14 +237,11 @@ class Demo {
     this.disposed = true;
     window.removeEventListener("resize", this.onResize);
     this.rendering.dispose()
-    this.rendering.update()
-    this.rendering.dispose()
     this.rendering.renderer.forceContextLoss()
     this.rendering.renderer.context.destroy()
     this.rendering.renderer.context.dispose()
     this.rendering.renderer.dispose()
     this.rendering.renderer.forceContextLoss()
-    this.startAnimationLoop();
   }
 
   getViewSizeAtDepth(depth = 0) {

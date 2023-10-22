@@ -91,7 +91,7 @@ const MeshStandardMaterialParameters = {
 //------------------------------------------------------------------------------ ◉
 
 
-const MeshPhysicalMaterialParameters = {
+const meshPhysicalMaterialParameters = {
   attenuationDistance: 1.0,
   attenuationColor: new THREE.Color(0xF5F5F5),
   color: 0xffffff,
@@ -123,54 +123,61 @@ const MeshPhysicalMaterialParameters = {
   precision: "highp",
 }
 
-let meshPhysicalMaterial;
 
-const initialTextureGenerator = new TextureGenerator()
 
+export function createMesh(geometry, material) {
+  return new THREE.Mesh(geometry, material)
+}
+
+const textureGenerator = new TextureGenerator();
+const initialTexture = textureGenerator.i_texture(TextureGenerator.wildcard, 1)
+
+
+  const meshPhysicalMaterial = new THREE.MeshPhysicalMaterial({
+  ...meshPhysicalMaterialParameters,
+  map: initialTexture,
+  emissiveMap: initialTexture,
+  aoMap: initialTexture,
+  envMap: initialTexture,
+  normalMap: initialTexture,
+  metalnessMap: initialTexture,
+  roughnessMap: initialTexture,
+  displacementMap: initialTexture,
+  clearcoatNormalMap: initialTexture,
+  sheenColorMap: initialTexture,
+})  
+
+export const meshes = {}
+// Initialize Meshes
 export function initializeMeshes() {
-  const initialTexture = initialTextureGenerator.i_texture(TextureGenerator.wildcard, (1, 4))
-  meshPhysicalMaterial = new THREE.MeshPhysicalMaterial({
-    map: initialTexture,
-    emissiveMap: initialTexture,
-    aoMap: initialTexture,
-    envMap: initialTexture,
-    normalMap: initialTexture,
-    metalnessMap: initialTexture,
-    roughnessMap: initialTexture,
-    displacementMap: initialTexture,
-    clearcoatNormalMap: initialTexture,
-    sheenColorMap: initialTexture,
-    ...MeshPhysicalMaterialParameters,
-  });
+  torusKMesh : createMesh(geometries.torusKG, meshPhysicalMaterial)
+  sphereMesh : createMesh(geometries.sphereG, meshPhysicalMaterial)
+  cubeMesh : createMesh(geometries.cubeG, meshPhysicalMaterial)
+  cylinderMesh : createMesh(geometries.cylinderG, meshPhysicalMaterial)
+  coneMesh : createMesh(geometries.coneG, meshPhysicalMaterial)
+  torusMesh : createMesh(geometries.torusG, meshPhysicalMaterial)
+  planeMesh : createMesh(geometries.planeG, meshPhysicalMaterial)
+  ringMesh : createMesh(geometries.ringG, meshPhysicalMaterial)
 }
 
+// Update Meshes with New Texture
 export function updateMeshes(newTexture) {
-  // Set the new texture to the map property of meshPhysicalMaterial
-  meshPhysicalMaterial.map = newTexture;
-  meshPhysicalMaterial.emissiveMap = newTexture
-  meshPhysicalMaterial.aoMap = newTexture
-  meshPhysicalMaterial.envMap = newTexture
-  meshPhysicalMaterial.normalMap = newTexture
-  meshPhysicalMaterial.metalnessMap = newTexture
-  meshPhysicalMaterial.roughnessMap = newTexture
-  meshPhysicalMaterial.displacementMap = newTexture
-  meshPhysicalMaterial.clearcoatNormalMap = newTexture
-  meshPhysicalMaterial.sheenColorMap = newTexture
-
-  planeMesh.material = meshPhysicalMaterial
-  torusMesh.material = meshPhysicalMaterial
-  torusKMesh.material = meshPhysicalMaterial
-  cubeMesh.material = meshPhysicalMaterial
-  cylinderMesh.material = meshPhysicalMaterial
-  coneMesh.material = meshPhysicalMaterial
-  ringMesh.material = meshPhysicalMaterial
+  for (const meshName in meshes) {
+    if (meshes.hasOwnProperty(meshName)) {
+      const mesh = meshes[meshName];
+      for (const mapName in newTexture) {
+        if (newTexture.hasOwnProperty(mapName)) {
+          mesh.material[mapName] = newTexture[mapName];
+        }
+      }
+    }
+  }
 }
 
-export const torusKMesh = new THREE.Mesh(geometries.torusKG, meshPhysicalMaterial);
-export const sphereMesh = new THREE.Mesh(geometries.sphereG, meshPhysicalMaterial);
-export const cubeMesh = new THREE.Mesh(geometries.cubeG, meshPhysicalMaterial);
-export const cylinderMesh = new THREE.Mesh(geometries.cylinderG, meshPhysicalMaterial);
-export const coneMesh = new THREE.Mesh(geometries.coneG, meshPhysicalMaterial);
-export const torusMesh = new THREE.Mesh(geometries.torusG, meshPhysicalMaterial);
-export const planeMesh = new THREE.Mesh(geometries.planeG, meshPhysicalMaterial);
-export const ringMesh = new THREE.Mesh(geometries.ringG, meshPhysicalMaterial);
+const position = (0,0,0)
+const scale = (0,0,0)
+const rotation = (0,0,0)
+// Initialization
+initializeMeshes(position, scale, rotation)
+// Export Mesh Objects
+export const { torusKMesh, sphereMesh, cubeMesh,cylinderMesh,coneMesh,torusMesh,planeMesh,ringMesh,} = meshes
