@@ -48,7 +48,34 @@ class Demo {
 
 //----------☞ CONTROLS
 
-    this.cameraControls.enabled = true
+    
+    console.log(
+      this.cameraControls.enabled = true,
+      this.cameraControls.active, 
+      this.cameraControls.currentAction,
+      this.cameraControls.distance,
+      this.cameraControls.minDistance,
+      this.cameraControls.maxDistance,
+      this.cameraControls.minZoom,
+      this.cameraControls.maxZoom,
+      this.cameraControls.polarAngle,
+      this.cameraControls.minPolarAngle,
+      this.cameraControls.maxPolarAngle,
+      this.cameraControls.azimuthAngle,
+      this.cameraControls.minAzimuthAngle,
+      this.cameraControls.maxAzimuthAngle,
+      this.cameraControls.boundaryEnclosesCamera = true,
+      this.cameraControls.boundaryFriction,
+      this.cameraControls.smoothTime = 0.5,
+      this.cameraControls.draggingSmoothTime = 0.5,
+      this.cameraControls.azimuthRotateSpeed = 0.5,
+      this.cameraControls.polarRotateSpeed = 0.5,
+      this.cameraControls.dollySpeed = 0.5,
+      this.cameraControls.truckSpeed = 0.5,
+      this.cameraControls.dollyToCursor = false,
+      this.cameraControls.verticalDragToForward = true,
+      this.cameraControls.colliderMeshes = []
+      )
 
   
 //----------☞ TARGETS 
@@ -60,9 +87,28 @@ class Demo {
     ////////////////////////////////////////////////////////////////
 // ✧ LIGHTS
 
-    const hemiLight = new THREE.HemisphereLight(hemiLightColors.space.skyC, hemiLightColors.space.groundC, 10.5)
+    const hemiLight = new THREE.HemisphereLight(hemiLightColors.forest.skyC, hemiLightColors.forest.groundC, 10.5)
     hemiLight.position.set(0, 5, 0)
     hemiLight.visible = true
+
+    const spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
+    spotLight.angle = Math.PI / 3
+    spotLight.penumbra = 0.1
+    spotLight.decay = 2
+    spotLight.spotLightPARAMS
+    spotLight.position.set(0, 50, 0)
+
+    const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
+    spotLightHelper.visible = false
+
+    spotLight.visible = false
+    spotLight.castShadow = true
+    spotLight.target = boxTarget;
+    spotLight.shadow.mapSize.width= 2048
+    spotLight.shadow.mapSize.height= 2048
+    spotLight.shadow.camera.near= 0.1
+    spotLight.shadow.camera.far= 100
+    spotLight.shadow.focus= 1;
 
 //------------ MESHES 
 
@@ -113,53 +159,6 @@ class Demo {
     this.cylinderMesh.scale.set(1, 1, 1)
     this.cylinderMesh.rotation.set(0, 0, 0)
     this.cylinderMesh.visible = false
-
-
-    const spotLight = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2, 1)
-    spotLight.angle = Math.PI / 3
-    spotLight.penumbra = 0.1
-    spotLight.decay = 2
-    spotLight.spotLightPARAMS
-    spotLight.position.set(0, 50, 0)
-
-    const spotLightHelper = new THREE.SpotLightHelper(spotLight, 4, 0xff0f0f)
-    spotLightHelper.visible = false
-
-    spotLight.visible = true
-    spotLight.castShadow = true
-    spotLight.target = boxTarget;
-    spotLight.shadow.mapSize.width= 2048
-    spotLight.shadow.mapSize.height= 2048
-    spotLight.shadow.camera.near= 0.1
-    spotLight.shadow.camera.far= 100
-    spotLight.shadow.focus= 1;
-
-    console.log(
-      this.cameraControls.active, 
-      this.cameraControls.currentAction,
-      this.cameraControls.distance,
-      this.cameraControls.minDistance,
-      this.cameraControls.maxDistance,
-      this.cameraControls.minZoom,
-      this.cameraControls.maxZoom,
-      this.cameraControls.polarAngle,
-      this.cameraControls.minPolarAngle,
-      this.cameraControls.maxPolarAngle,
-      this.cameraControls.azimuthAngle,
-      this.cameraControls.minAzimuthAngle,
-      this.cameraControls.maxAzimuthAngle,
-      this.cameraControls.boundaryEnclosesCamera = true,
-      this.cameraControls.boundaryFriction,
-      this.cameraControls.smoothTime = 0.5,
-      this.cameraControls.draggingSmoothTime = 0.5,
-      this.cameraControls.azimuthRotateSpeed = 0.5,
-      this.cameraControls.polarRotateSpeed = 0.5,
-      this.cameraControls.dollySpeed = 0.5,
-      this.cameraControls.truckSpeed = 0.5,
-      this.cameraControls.dollyToCursor = false,
-      this.cameraControls.verticalDragToForward = true,
-      this.cameraControls.colliderMeshes = []
-      )
 
 
 //-----✧ GUI HELPERS 

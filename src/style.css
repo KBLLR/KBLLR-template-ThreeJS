@@ -166,6 +166,23 @@ nav {
   text-align: center;
 }
 
+.menu-item {
+  background-color: hsla(0, 0%, 19%, 0.193);
+  color: hsla(0, 0%, 100%, 0.8);
+  border-radius: 2px;
+  padding: 0 0.5%;
+  transition: ease-in-out 0.4s;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: hsla(0, 0%, 19%, 0.5); /* Change the background color on hover */
+  color: hsla(0, 0%, 100%, 1); /* Change the text color on hover */
+  border-radius: 4px;
+  padding: 0 0.5%;
+  cursor: pointer; /* Change the cursor to a pointer on hover (optional) */
+}
+
 .ui {
   position: fixed;
   z-index: 100000;
@@ -187,7 +204,7 @@ nav {
 #ui-title {
 
   font-family: 'flowa';
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 800;
   line-height: 0.8;
   letter-spacing: .04em;
@@ -203,7 +220,15 @@ nav {
   margin: 0 auto !important;
 
   text-transform: uppercase;
+
+  @media screen and (min-width: 340px) {
+    font-size: 2rem;
+  }
+
   @media screen and (min-width: 640px) {
+    font-size: 3rem;
+  }
+  @media screen and (min-width: 920px) {
     font-size: 4rem;
   }
 }
@@ -239,10 +264,12 @@ nav {
   background-color: hsla(0, 0%, 19%, 0.193);
   border-radius: 4px;
   color:hsla(0, 0%, 100%,0.8);
-  font-family: 'pirulen';
+  font-family: 'Roboto-Regular';
   font-size: 0.4rem;
   text-align: center;
+  display: none;
 }
+
 ui-bar {
   display: flex;
   flex-flow: row nowrap;
