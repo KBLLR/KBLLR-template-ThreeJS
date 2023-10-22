@@ -1,5 +1,4 @@
 
-
 export const collectionTitles = [
     "Cosmic Wonders",
     "Vivid Hues",
@@ -50,3 +49,74 @@ export const topics = [
 [ "motion", "force", "acceleration", "gravity", "energy", "momentum", "work", "power", "heat", "temperature", "pressure", "volume" ],
 ["solid", "liquid", "gas", "plasma", "superfluid", "Bose–Einstein condensate", "fermionic condensate", "neutron-degenerate matter", "quark–gluon plasma", "amorphous solid", "liquid crystal", "glass", "crystal", "metal", "insulator", "semiconductor", "superconductor", "piezoelectric", "pyroelectric", "shape-memory alloy", "metamaterial", "smart material", "biological material", "geological material", "synthetic material"]
 ]
+
+export const geometryParams = {
+  cube: {
+    width: 1,
+    height: 1,
+    depth: 1,
+    widthSegments: 10,
+    heightSegments: 10,
+    depthSegments: 100,
+  },
+  circle: {
+    radius: 1,
+    segments: 32,
+    thetaStart: 0,
+    thetaLength: Math.PI * 2,
+  },
+  cone: {
+    radius: 8,
+    height: 16,
+    radialSegments: 32,
+    heightSegments: 16,
+    openEnded: false,
+  },
+  cylinder: {
+    radiusTop: 1,
+    radiusBottom: 1,
+    height: 10,
+    radialSegments: 32,
+    heightSegments: 1,
+    openEnded: false,
+  },
+  plane: {
+    width: 1,
+    height: 1,
+    widthSegments: 100,
+    heightSegments: 100,
+  },
+  ring: {
+    innerRadius: 50,
+    outerRadius: 0,
+    thetaSegments: 64,
+    phiSegments: 1,
+    thetaStart: 1,
+    thetaLength: Math.PI * 2,
+  },
+  sphere: {
+    radius: 1,
+    widthSegments: 32,
+    heightSegments: 32,
+    phiStart: 1,
+    phiLength: Math.PI,
+    thetaStart: 0,
+    thetaLength: Math.PI * 2,
+  },
+  torus: {
+    radius: 10,
+    tube: 1.15,
+    radialSegments: 32,
+    tubularSegments: 32,
+    arc: Math.PI * 2,
+  },
+  torusK: {
+    radius: 10,
+    tube: 4,
+    radialSegments: 24,
+    tubularSegments: 64,
+    p: 8,
+    q: 24,
+    heightScale: 10,
+  },
+};

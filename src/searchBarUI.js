@@ -1,5 +1,5 @@
 import { collectionTitles, topics } from './data/data.js';
-import { TextureGenerator } from './textures.js';
+import { TextureGenerator } from './textureGenerator.js';
 import { updateMeshes } from './meshes.js'; // Import the function to update meshes
 
 export class SearchBarUI {

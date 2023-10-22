@@ -12,7 +12,6 @@ class TextureGenerator {
   }
 
   updateUITitle() {
-    // Choose a random index within the range of available collections
     this.currentTopicIndex = Math.floor(Math.random() * collectionTitles.length);
     
     const currentCollection = collectionTitles[this.currentTopicIndex];
@@ -21,7 +20,6 @@ class TextureGenerator {
     const randomWord = this.getRandomWordFromCollection(currentCollection);
     this.uiColTitle.textContent = randomWord;
   }
-
   getRandomTopic() {
     const topicArray = topics[this.currentTopicIndex];
     if (!topicArray || topicArray.length === 0) {
@@ -45,8 +43,30 @@ class TextureGenerator {
     return topicArray[Math.floor(Math.random() * topicArray.length)];
   }
 
-  g_texture(wildcard = "topic", repeat = (2,4)) {
-    const path = `https://source.unsplash.com/random/?${wildcard}`;
+  i_texture(wildcard = "topic", repeat = (1,1) ) {
+    const path = `https://source.unsplash.com/random/?${wildcard}`
+    const preload = new THREE.TextureLoader().load(
+      path ? path : this.Template,
+      (e) => {
+        e.mapping = THREE.EquirectangularRefractionMapping;
+        e.anisotropy = this.anisotropyLevel;
+        e.magFilter = THREE.NearestFilter;
+        e.minFilter = THREE.LinearMipmapLinearFilter;
+        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping;
+        e.type = THREE.HalfFloatType;
+        e.format = THREE.RGBAFormat;
+        e.repeat.set(repeat, repeat);
+        e.generateMipmaps = true;
+        e.needsUpdate = true;
+        e.dispose();
+      }
+    );
+    console.log(preload);
+    return preload;
+  }
+
+  g_texture(wildcard = "topic", repeat = (4,16)) {
+    const path = `https://source.unsplash.com/random/?${wildcard}`
     const preload = new THREE.TextureLoader().load(
       path ? path : this.Template,
       (e) => {
