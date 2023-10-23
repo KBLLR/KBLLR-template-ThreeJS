@@ -1,86 +1,90 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <title>KBΓΓO✧Graphics</title>
-    <meta name="apple-mobile-web-app-title" content="KBLLR" />
-    <meta name="description" content="VOL 01.Portfolio KBLLR" />
-    <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta property="og:title" content="✧ Project001// Anja ♘" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.kbllr.graphics" />
-    <meta property="og:image" content="https://htdi.community/favicon.svg" />
-    <meta property="og:description" content="Artwork from Creative Developer and Technical Artist, David Caballero" />
-    <link rel="stylesheet" href="src/fonts/Roboto-Bold.woff2">
-    <link rel="stylesheet" href="src/fonts/Roboto-Medium.woff2">
-    <link rel="stylesheet" href="src/fonts/Roboto-Regular.woff2">
-    <link rel="stylesheet" href="src/fonts/Roboto-Thin.woff2">
-    <link rel="stylesheet" href="src/fonts/flowa.woff2">
-    <link rel="stylesheet" href="src/fonts/pirulen.woff2">
-    <link rel="stylesheet" type="text/css" href="./src/style.css">
-  </head>
-  <body>
-    <!-- Cursor -->
-    <div id="custom-cursor"></div>
 
-    <!-- Canvas -->
-    <div id="canvas-wrapper"><canvas id="canvas"></canvas></div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <title>KBΓΓO✧Graphics</title>
+  <meta name="apple-mobile-web-app-title" content="KBLLR" />
+  <meta name="description" content="VOL 01.Portfolio KBLLR" />
+  <meta name="viewport" id="viewport"
+    content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta property="og:title" content="✧ Project001// Anja ♘" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.kbllr.graphics" />
+  <meta property="og:image" content="https://htdi.community/favicon.svg" />
+  <meta property="og:description" content="Artwork from Creative Developer and Technical Artist, David Caballero" />
+  <link rel="stylesheet" href="src/fonts/Roboto-Bold.woff2">
+  <link rel="stylesheet" href="src/fonts/Roboto-Medium.woff2">
+  <link rel="stylesheet" href="src/fonts/Roboto-Regular.woff2">
+  <link rel="stylesheet" href="src/fonts/Roboto-Thin.woff2">
+  <link rel="stylesheet" href="src/fonts/flowa.woff2">
+  <link rel="stylesheet" href="src/fonts/pirulen.woff2">
+  <link rel="stylesheet" type="text/css" href="./src/style.css">
+</head>
 
-    <!-- UI TITLES -->
-    <div class="ui">
-      <div id="result-element">Berlin,10.2023</div>
-      <h4 id="ui-col-title">KBLLR.graphics</h4>
-      <h3 id="ui-title">DEMO-TITLE</h3>
+<body>
+  <!-- Cursor -->
+  <div id="custom-cursor"></div>
+
+  <!-- Canvas -->
+  <div id="canvas-wrapper"><canvas id="canvas"></canvas></div>
+
+  <!-- UI TITLES -->
+  <div class="ui">
+    <div id="result-element">Berlin,10.2023</div>
+    <h4 id="ui-col-title">KBLLR.graphics</h4>
+    <h3 id="ui-title">DEMO-TITLE</h3>
+  </div>
+
+  <!-- UI INPUTS -->
+  <div id="ui-bar-wraper">
+    <div class="left">
+      <button id="generateRandomWord">Random Inspiration</button>
     </div>
-
-    <!-- UI INPUTS -->
-    <div id="ui-bar-wraper">
-      <div class="left">
-        <button id="generateRandomWord">Random Inspiration</button>
-      </div>
-      <div class="middle">
-        <input type="text" id="inputWord" placeholder="Dare to dream">
-        <div id="suggestions"></div>
-      </div>
-      <div class="right">
-        <button id="sendWord">Send</button>
-      </div>
+    <div class="middle">
+      <input type="text" id="inputWord" placeholder="Dare to dream">
+      <div id="suggestions"></div>
     </div>
-
-    <!-- UI MENU -->
-    <nav>
-      <div class="menu-item" id="logo">KNIGHT</div>
-      <div class="menu-item" id="projects">Projects</div>
-      <div class="menu-item" id="tools">Tools</div>
-      <div class="menu-item" id="blog">Blog</div>
-      <div class="menu-item" id="lab">Lab</div>
-      <div class="menu-item" id="about">About</div>
-      <div class="menu-item" id="contact">Contact</div>
-    </nav>
-
-    <!-- Debug -->
-    <div class="data-layout-C">
-      <div class="column" id="debug,--1"></div>
-      <div class="column" id="debug,--2"></div>
-      <div class="column" id="debug,--3"></div>
-      <div class="column" id="debug,--4"></div>
-      <div class="column" id="debug,--5"></div>
-      <div class="column" id="debug,--6"></div>
+    <div class="right">
+      <button id="sendWord">Send</button>
     </div>
-    
-    <div class="data-layout-R">
-      <div class="row" id="debug,--1"></div>
-      <div class="row" id="debug,--2"></div>
-      <div class="row" id="debug,--3"></div>
-      <div class="row" id="debug,--4"></div>
-      <div class="row" id="debug,--5"></div>
-      <div class="row" id="debug,--6"></div>
-    </div>  
-  
-    <script type="module" src="./src/textures.js"></script>
-    <script type="module" src="./src/app.js"></script>
-  </body>
+  </div>
+
+  <!-- UI MENU -->
+  <nav>
+    <div class="menu-item" id="logo">KNIGHT</div>
+    <div class="menu-item" id="projects">Projects</div>
+    <div class="menu-item" id="tools">Tools</div>
+    <div class="menu-item" id="blog">Blog</div>
+    <div class="menu-item" id="lab">Lab</div>
+    <div class="menu-item" id="about">About</div>
+    <div class="menu-item" id="contact">Contact</div>
+  </nav>
+
+  <!-- Debug -->
+  <div class="data-layout-C">
+    <div class="column" id="debug--1"></div>
+    <div class="column" id="debug--2"></div>
+    <div class="column" id="debug--3"></div>
+    <div class="column" id="debug--4"></div>
+    <div class="column" id="debug--5"></div>
+    <div class="column" id="debug--6"></div>
+  </div>
+
+  <div class="data-layout-R">
+    <div class="row" id="debug,--1"></div>
+    <div class="row" id="debug,--2"></div>
+    <div class="row" id="debug,--3"></div>
+    <div class="row" id="debug,--4"></div>
+    <div class="row" id="debug,--5"></div>
+    <div class="row" id="debug,--6"></div>
+  </div>
+
+  <script type="module" src="./src/textures.js"></script>
+  <script type="module" src="./src/app.js"></script>
+</body>
+
 </html>

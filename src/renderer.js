@@ -36,7 +36,7 @@ export class Rendering {
         alpha: false,
         stencil: false,
         preserveDrawingBuffer: false,
-        gammaOutput: false,
+        gammaOutput: true,
     });
 
     this.renderer.setSize(this.vp.canvas.width, this.vp.canvas.height, false)

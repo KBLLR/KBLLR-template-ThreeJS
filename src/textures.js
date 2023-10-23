@@ -42,30 +42,30 @@ class TextureGenerator {
       console.error("Invalid or empty topic array.");
       return null;
     }
-    return topicArray[Math.floor(Math.random() * topicArray.length)];
+    return topicArray[Math.floor(Math.random() * topicArray.length)]
   }
 
-  g_texture(wildcard = "topic", repeat = (2,4)) {
-    const path = `https://source.unsplash.com/random/?${wildcard}`;
+  g_texture(wildcard = "topic", repeat = (16,2)) {
+    const path = `https://source.unsplash.com/random/?${wildcard}`
     const preload = new THREE.TextureLoader().load(
       path ? path : this.Template,
       (e) => {
         e.mapping = THREE.EquirectangularRefractionMapping;
-        e.anisotropy = this.anisotropyLevel;
-        e.magFilter = THREE.NearestFilter;
-        e.minFilter = THREE.LinearMipmapLinearFilter;
-        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping;
-        e.type = THREE.HalfFloatType;
-        e.format = THREE.RGBAFormat;
-        e.repeat.set(repeat, repeat);
-        e.generateMipmaps = true;
-        e.needsUpdate = true;
-        e.dispose();
+        e.anisotropy = this.anisotropyLevel
+        e.magFilter = THREE.NearestFilter
+        e.minFilter = THREE.LinearMipmapLinearFilter
+        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping
+        e.type = THREE.HalfFloatType
+        e.format = THREE.RGBAFormat
+        e.repeat.set(repeat, repeat)
+        e.generateMipmaps = true
+        e.needsUpdate = true
+        e.dispose()
       }
     );
-    console.log(preload);
-    return preload;
+    console.log(preload)
+    return preload
   }
 }
 
-export { TextureGenerator };
+export { TextureGenerator }

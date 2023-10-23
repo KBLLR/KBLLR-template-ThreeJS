@@ -185,12 +185,13 @@ nav {
 
 .ui {
   position: fixed;
-  z-index: 100000;
+  z-index: 10000;
   bottom: 50px;
   left: 0;
   right: 0;
   text-align: center;
 }
+
 #ui-col-title {
   font-family: 'pirulen';
   font-size: 1rem;
@@ -202,7 +203,6 @@ nav {
 }
 
 #ui-title {
-
   font-family: 'flowa';
   font-size: 3rem;
   font-weight: 800;

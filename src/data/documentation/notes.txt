@@ -261,17 +261,75 @@ Low-poly models
 
 ***
 ------------------------------------------------------------------------------ ◉
+The Bidirectional Texture Function (BTF) is a data-driven solution to render materials with complex appearance. A typical capture contains tens of thousands of images of a material sample under varying viewing and lighting conditions. While capable of faithfully recording complex light interactions in the material, the main drawback is the massive memory requirement, both for storing and rendering, making effective compression of BTF data a critical component in practical applications.
+
+# UNIFIED NEURAL ENCODING
+---
+
+https://rgl.epfl.ch/publications/Rainer2020Unified
+https://reality.cs.ucl.ac.uk/projects/btf/rainer19neural.html
+
+NEURAL BTF COMPRESSION AND INTERPOLATION
+https://reality.cs.ucl.ac.uk/projects/btf/rainer19neural.html
+
+HIGH-RESOLUTION BTF CAPTURE FOR DELICATE MATERIALS
+https://reality.cs.ucl.ac.uk/projects/btf/rainer2019highresolution.html
+
+------------------------------------------------------------------------------ ◉
+
+### CGI DATABASES & RESOURCES
+https://github.com/afichet/cgi-resources
+
+
+### Miguel Crespo (RGL) resources and useful Links
+https://mcrespo.me/
+
+### RGL - Realistic Graphics Lab  Papers
+https://rgl.epfl.ch/publications
+
+### Imaging and Vision Laboratory
+https://cave.cs.columbia.edu/
+
+### HDRI Maps 
+https://noemotionhdrs.net/hdrother.html
+
+------------------------------------------------------------------------------ ◉
+# TOOLS
+---
+
+### RefractiveIndex.info
+- https://refractiveindex.info/
+
+### Tekari - A BSDF-data visualization and editing tool.
+- https://github.com/rgl-epfl/tekari?tab=readme-ov-file#pgII
+
+### ART - Advanced Rendering Toolkit
+- https://cgg.mff.cuni.cz/ART/
+
+------------------------------------------------------------------------------ ◉
 # COLOR SPACE - COLOR MANAGEMENT - Linear sRGBA - sRGBA
-https://threejs.org/docs/#manual/en/introduction/Color-management
-https://en.wikipedia.org/wiki/RGB_color_space
-https://en.wikipedia.org/wiki/Gamma_correction
-https://libpng.org/pub/png/spec/1.2/PNG-GammaAppendix.html
-https://poynton.com/notes/colour_and_gamma/GammaFAQ.html 
-https://stackoverflow.com/questions/12524623/what-are-the-practical-differences-when-working-with-colors-in-a-linear-vs-a-no/12894053#12894053
+---
+
+- https://threejs.org/docs/#manual/en/introduction/Color-management
+
+- https://en.wikipedia.org/wiki/RGB_color_space
+
+- https://en.wikipedia.org/wiki/Gamma_correction
+
+- https://libpng.org/pub/png/spec/1.2/PNG-GammaAppendix.html
+
+- https://poynton.com/notes/colour_and_gamma/GammaFAQ.html 
+
+- https://stackoverflow.com/questions/12524623/
+what-are-the-practical-differences-when-working-with-colors-in-a-linear-vs-a-no/12894053#12894053
 https://developer.nvidia.com/gpugems/gpugems3/part-iv-image-effects/chapter-24-importance-being-linears
+
+### Physics & COlor SCience: Planckian locus
+- https://en.wikipedia.org/wiki/Planckian_locus#Approximation
 
 ------------------------------------------------------------------------------ ◉
 # FILTERS
+---
 
 ### Anisotropic Filtering:
 Retains the "sharpness" of a texture normally lost by MIP map texture's attempts to avoid aliasing. Anisotropic filtering can therefore be said to maintain crisp texture detail at all viewing orientations while providing fast anti-aliased texture filtering.
@@ -279,36 +337,177 @@ Retains the "sharpness" of a texture normally lost by MIP map texture's attempts
 Example: https://threejs.org/examples/?q=anisotropy#webgl_materials_texture_anisotropy
 Wikipedia: https://en.wikipedia.org/wiki/Anisotropic_filtering
 
+Matirial DataBase - https://rgl.epfl.ch/materials
+Anisotropic DataSEt - https://rgl.s3.eu-central-1.amazonaws.com/media/papers/Dupuy2018Adaptive_2.pdf
+Isotropic DataSEt - https://rgl.s3.eu-central-1.amazonaws.com/media/papers/Dupuy2018Adaptive_1.pdf
+
 ------------------------------------------------------------------------------ ◉
 # CUBE TEXTURE LOADER
-https://threejs.org/docs/#api/en/loaders/CubeTextureLoader
-https://threejs.org/examples/?q=cubemap#webgl_materials_cubemap_dynamic
-https://threejs.org/docs/#api/en/textures
-https://learnopengl.com/Advanced-OpenGL/Cubemaps
+---
+
+- https://threejs.org/docs/#api/en/loaders/CubeTextureLoader
+- https://threejs.org/examples/?q=cubemap#webgl_materials_cubemap_dynamic
+- https://threejs.org/docs/#api/en/textures
+- https://learnopengl.com/Advanced-OpenGL/Cubemaps
+- https://www.andrewwillmott.com/tech-notes#TOC-Spherical-Harmonics
+- https://cgg.mff.cuni.cz/publications/an-openexr-layout-for-spectral-images/
 
 ------------------------------------------------------------------------------ ◉
-# PBR 
+# PBR- Physically Based Rendering
+---
 
-https://lousodrome.net/blog/light/2011/12/27/readings-on-physically-based-rendering/
-https://marmoset.co/posts/physically-based-rendering-and-you-can-too/
+- https://lousodrome.net/blog/light/2011/12/27/readings-on-physically-based-rendering/
+- https://marmoset.co/posts/physically-based-rendering-and-you-can-too/
+- https://marmoset.co/posts/pbr-texture-conversion/
+
+### Metals Study (Behance)
+- https://www.behance.net/gallery/35636521/Material-Studies-Metals
+
+
+------------------------------------------------------------------------------ ◉
+# DOCS
+---
+
+### Spectral Viewer
+- https://mrf-devteam.gitlab.io/spectral-viewer/documentation/
+
+### supabase DOCS - pgvector: Embeddings and vector similarity
+- https://supabase.com/docs/guides/database/extensions/pgvector
+
+### OPenaI API DOCS
+- https://platform.openai.com/docs/introduction/overview
+- https://platform.openai.com/docs/guides/embeddings/limitations-risks
+
+------------------------------------------------------------------------------ ◉
+# SHADERS 
+---
+
+
+------------------------------------------------------------------------------ ◉
+# SOCIAL
+---
+### DEMOZOO
+- https://demozoo.org/parties/4536/
 
 ------------------------------------------------------------------------------ ◉
 # THREEJS
-https://threejs
-https://threejs.org/docs/#api/en/constants/Textures
-https://threejs.org/docs/#api/geometries/BoxGeometry
-https://threejs.org/docs/#api
-https://discourse.threejs.org/t/three-js-bookshelf/2468
+---
+
+- https://threejs
+- https://threejs.org/docs/#api/en/constants/Textures
+- https://threejs.org/docs/#api/geometries/BoxGeometry
+- https://threejs.org/docs/#api
+- https://discourse.threejs.org/t/three-js-bookshelf/2468
 
 ------------------------------------------------------------------------------ ◉
-# COURSES 
+# POINT CLOUDS / GAUSSIAN SPLATTING
+---
+
+### Real Time Radial Field Rendering
+- https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/
+
+------------------------------------------------------------------------------ ◉
+# LIBRARIES
+---
+
+### Animation Libraries:
+-
+
+### TheatreJS
+https://www.theatrejs.com/
+
+### Gsap
+https://greensock.com/gsap/
+
+
+------------------------------------------------------------------------------ ◉
+# COURSES / TUTORIALS
+---
+
+### Physically Based Rendering 
+https://pbr-book.org/3ed-2018/contents
 
 ### SIGRAPH 2017 Course: Physically Based Shading in Theory and Practice 
 https://blog.selfshadow.com/publications/s2017-shading-course/
 
+### SIGRAPH 2020 Course: Physically Based Shading in Theory and Practice 
+https://blog.selfshadow.com/publications/s2020-shading-course/#materialx
+
+### RAYMARCHING WORKSHOP
+https://github.com/electricsquare/raymarching-workshop
+
+### INMMERSIVE MATH
+https://immersivemath.com/ila/index.html
+
+### First Principles of Computer Vision
+https://fpcv.cs.columbia.edu/
+https://fpcv.cs.columbia.edu/Monographs
+
+### Mitsuba 3 - Inverse Rendering Tutorials
+- https://mitsuba.readthedocs.io/en/stable/src/inverse_rendering_tutorials.html
+
+
 ------------------------------------------------------------------------------ ◉
-# GITHUB Repos    
-https://github.com/zadvorsky/three.bas
-https://github.com/yomotsu/camera-controls
+# DATASETS
+---
+
+### RGL Material Database
+- https://rgl.epfl.ch/materials
+
+### Columbia-Utrecht Reflectance and Texture Database
+- https://cave.cs.columbia.edu/repository/CURET
+
+### Columbia Multi-Spectral Database
+- https://www.cs.columbia.edu/CAVE/databases/multispectral/
+
+### Columbia Gaze Data Set
+- https://cave.cs.columbia.edu/repository/ColumbiaGazeDataSet
+
+------------------------------------------------------------------------------ ◉
+# PROMPT ENGINERRING
+---
+
+### Prompts to generate ICons (DALLE-e)
+- https://twitter.com/techhalla/status/1713352517889749185
 
 
+------------------------------------------------------------------------------ ◉
+# GITHUB Repositories  
+---
+
+### Buffer Animation System
+- https://github.com/zadvorsky/three.bas
+
+### Camera Controls
+- https://github.com/yomotsu/camera-controls
+
+### PBRT Loader
+- https://github.com/mmp/pbrt-v3?tab=readme-ov-file
+
+### BRDF Loader
+- https://github.com/rgl-epfl/brdf-loader
+
+### Spectral EXR Viewer
+- https://github.com/afichet/spectral-exr?tab=readme-ov-file
+
+### LUTS - Color Correcting for types of colour blindness, protanopia, deuteranopia, and tritanopia. 
+- https://github.com/andrewwillmott/colour-blind-luts
+
+### Sky Models
+- https://github.com/andrewwillmott/sun-sky
+
+### Shader Minifier
+- https://github.com/laurentlb/shader_minifier
+
+### Material-X
+- https://github.com/AcademySoftwareFoundation/MaterialX
+
+### Chat GPT retrieval Plugin 
+- https://github.com/openai/chatgpt-retrieval-plugin
+
+------------------------------------------------------------------------------ ◉
+# APIS
+---
+
+### Material-X
+- https://materialx.org/docs/api/index.html
