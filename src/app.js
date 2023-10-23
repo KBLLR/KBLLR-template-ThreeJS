@@ -108,47 +108,17 @@ class Demo {
     this.sphereMesh.rotation.set(0, 0, 0)
     this.sphereMesh.visible = false
 
-    this.ringMesh = ringMesh
-    this.ringMesh.position.set(0, 0, 0)
-    this.ringMesh.scale.set(8, 8, 8)
-    this.ringMesh.rotation.set(0, 0, 0)
-    this.ringMesh.visible = false
-
-    this.cubeMesh = cubeMesh
-    this.cubeMesh.position.set(0, 0, 0)
-    this.cubeMesh.scale.set(4, 4, 4)
-    this.cubeMesh.rotation.set(0, 0, 0)
-    this.cubeMesh.visible = false
-
-    this.coneMesh = coneMesh
-    this.coneMesh.position.set(0, 0, 0)
-    this.coneMesh.scale.set(1, 1, 1)
-    this.coneMesh.rotation.set(0, 0, 0)
-    this.coneMesh.visible = false
-
     this.torusMesh = torusMesh
     this.torusMesh.position.set(0, 0, 0)
     this.torusMesh.scale.set(1, 1, 1)
     this.torusMesh.rotation.set(0, 0, 0)
     this.torusMesh.visible = false
 
-    this.torusKMesh = torusKMesh
-    this.torusKMesh.position.set(0, 0, 0)
-    this.torusKMesh.scale.set(1, 1, 1)
-    this.torusKMesh.rotation.set(0, 0, 0)
-    this.torusKMesh.visible = false
-
     this.planeMesh = planeMesh
     this.planeMesh.position.set(0, 0, 0)
     this.planeMesh.scale.set(16, 9, 0)
     this.planeMesh.rotation.set(0, 0, 0) //.rotation.x = -Math.PI / 2
     this.planeMesh.visible = true
-
-    this.cylinderMesh = cylinderMesh
-    this.cylinderMesh.position.set(0, 0, 0)
-    this.cylinderMesh.scale.set(1, 1, 1)
-    this.cylinderMesh.rotation.set(0, 0, 0)
-    this.cylinderMesh.visible = false
 
 
 //-----✧ GUI HELPERS 
@@ -172,13 +142,8 @@ class Demo {
 //-----✧ SCENE ADD EVENTS
 
     this.rendering.scene.add(this.sphereMesh)
-    this.rendering.scene.add(this.coneMesh)
-    this.rendering.scene.add(this.cubeMesh)
     this.rendering.scene.add(this.planeMesh)
-    this.rendering.scene.add(this.cylinderMesh)
     this.rendering.scene.add(this.torusMesh)
-    this.rendering.scene.add(this.torusKMesh)
-    this.rendering.scene.add(this.ringMesh)
 
     //this.rendering.scene.add(dirLight)
     this.rendering.scene.add(spotLight)

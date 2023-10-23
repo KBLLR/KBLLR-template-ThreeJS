@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import { collectionTitles, topics } from './data/data.js'
+import * as THREE from 'three';
+import axios from 'axios';
 
 class TextureGenerator {
   constructor() {
@@ -11,61 +11,44 @@ class TextureGenerator {
     this.currentTopicIndex = 0;
   }
 
-  updateUITitle() {
-    // Choose a random index within the range of available collections
-    this.currentTopicIndex = Math.floor(Math.random() * collectionTitles.length);
+  async generateImage(prompt) {
+    try {
+      const response = await axios.post('http://localhost:3000/image', { prompt: prompt });
+      return response.data;
+    } catch (error) {
+      console.error('Error generating image:', error);
+      return null;
+    }
+  }
+
+  async g_texture(wildcard = "topic", repeat = 8) {  // Corrected repeat argument default value syntax
+    const textPrompt = wildcard === "topic" ? this.getRandomTopic() : wildcard;
+    const imageURL = await this.generateImage(textPrompt);
     
-    const currentCollection = collectionTitles[this.currentTopicIndex];
-    this.uiTitle.textContent = currentCollection;
-
-    const randomWord = this.getRandomWordFromCollection(currentCollection);
-    this.uiColTitle.textContent = randomWord;
-  }
-
-  getRandomTopic() {
-    const topicArray = topics[this.currentTopicIndex];
-    if (!topicArray || topicArray.length === 0) {
-      console.error("Invalid or empty topic array.");
+    if (!imageURL) {
+      console.error('Failed to generate image.');
       return null;
     }
-    return topicArray[Math.floor(Math.random() * topicArray.length)];
-  }
 
-  getRandomWordFromCollection(collectionTitle) {
-    const collectionIndex = collectionTitles.indexOf(collectionTitle);
-    if (collectionIndex === -1) {
-      console.error("Collection title not found.");
-      return null;
-    }
-    const topicArray = topics[collectionIndex];
-    if (!topicArray || topicArray.length === 0) {
-      console.error("Invalid or empty topic array.");
-      return null;
-    }
-    return topicArray[Math.floor(Math.random() * topicArray.length)]
-  }
-
-  g_texture(wildcard = "topic", repeat = (16,2)) {
-    const path = `https://source.unsplash.com/random/?${wildcard}`
     const preload = new THREE.TextureLoader().load(
-      path ? path : this.Template,
+      imageURL,
       (e) => {
         e.mapping = THREE.EquirectangularRefractionMapping;
-        e.anisotropy = this.anisotropyLevel
-        e.magFilter = THREE.NearestFilter
-        e.minFilter = THREE.LinearMipmapLinearFilter
-        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping
-        e.type = THREE.HalfFloatType
-        e.format = THREE.RGBAFormat
-        e.repeat.set(repeat, repeat)
-        e.generateMipmaps = true
-        e.needsUpdate = true
-        e.dispose()
+        e.anisotropy = this.anisotropyLevel;
+        e.magFilter = THREE.NearestFilter;
+        e.minFilter = THREE.LinearMipmapLinearFilter;
+        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping;
+        e.type = THREE.HalfFloatType;
+        e.format = THREE.RGBAFormat;
+        e.repeat.set(repeat, repeat);
+        e.generateMipmaps = true;
+        e.needsUpdate = true;
+        // Removed e.dispose() as it would dispose of the texture immediately after loading.
       }
     );
-    console.log(preload)
-    return preload
+    console.log(preload);
+    return preload;
   }
 }
 
-export { TextureGenerator }
+export { TextureGenerator };

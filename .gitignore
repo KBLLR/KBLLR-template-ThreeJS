@@ -9,7 +9,8 @@ lerna-debug.log*
 
 node_modules
 src/static/
-src/data/notes.txt
+src/data/
+src/fonts/
 dist
 dist-ssr
 *.local
@@ -17,6 +18,18 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# IDEs
+.idea/*
+!.idea/workspace.xml
+!.idea/tasks.xml
+!.idea/dictionaries
+!.idea/shelf
+!.idea/dataSources
+.env
 .idea
 .DS_Store
 *.suo
