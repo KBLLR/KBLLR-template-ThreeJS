@@ -407,6 +407,16 @@ Isotropic DataSEt - https://rgl.s3.eu-central-1.amazonaws.com/media/papers/Dupuy
 - https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/
 
 ------------------------------------------------------------------------------ ◉
+# GOOGLE MEDIA PIPELINE
+---
+
+### Google Media Pipeline
+- https://github.com/google/mediapipe
+
+### P5 Demo HandTracking + Facial Landmarks
+https://editor.p5js.org/orrkislev/sketches/wwLqrnVDt
+
+
 # LIBRARIES
 ---
 
@@ -469,6 +479,15 @@ https://fpcv.cs.columbia.edu/Monographs
 
 ### Prompts to generate ICons (DALLE-e)
 - https://twitter.com/techhalla/status/1713352517889749185
+
+### OpenAI Cookbook
+- https://beta.openai.com/docs/engines/cookbook
+
+### OpenAI API
+- https://beta.openai.com/docs/api-reference/introduction
+
+### OpenAI CLI
+- https://beta.openai.com/docs/api
 
 
 ------------------------------------------------------------------------------ ◉

@@ -5,7 +5,7 @@ import { TextureGenerator } from './textures.js'
 import { updateMeshes } from './meshes.js'
 import { palettes, sinPalettes, hemiLightColors } from './palette.js'
 import { getPaletteFromParams, setupControls } from './utils.js'
-import { torusKMesh, torusMesh, cylinderMesh, sphereMesh, cubeMesh, planeMesh, coneMesh, ringMesh } from './meshes.js'
+import { torusMesh, sphereMesh, planeMesh } from './meshes.js'
 import './style.css'
 
 CameraControls.install( { THREE } )

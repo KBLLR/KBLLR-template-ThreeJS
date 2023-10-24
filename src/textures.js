@@ -3,9 +3,9 @@ import axios from 'axios';
 
 class TextureGenerator {
   constructor() {
-    this.uiTitle = document.getElementById("ui-title");
-    this.uiColTitle = document.getElementById("ui-col-title");
-    this.Template = "https://unsplash.com/photos/QwoNAhbmLLo";
+    this.uiTitle = document.getElementById("ui-title")
+    this.uiColTitle = document.getElementById("ui-col-title")
+    this.Template = "https://unsplash.com/photos/QwoNAhbmLLo"
     this.anisotropyLevel = 16;
     this.wildCard = null;
     this.currentTopicIndex = 0;
@@ -43,9 +43,8 @@ class TextureGenerator {
         e.repeat.set(repeat, repeat);
         e.generateMipmaps = true;
         e.needsUpdate = true;
-        // Removed e.dispose() as it would dispose of the texture immediately after loading.
       }
-    );
+    )
     console.log(preload);
     return preload;
   }

@@ -158,7 +158,7 @@ export function updateMeshes(wildMapMisc) {
   MeshPhysicalMaterialParams.envMap = wildMapMisc
   MeshPhysicalMaterialParams.normalMap = wildMapMisc
   MeshPhysicalMaterialParams.metalnessMap = wildMapMisc
-  MeshPhysicalMaterialParams.roughnessMap = wildMapMis
+  MeshPhysicalMaterialParams.roughnessMap = wildMapMisc
   MeshPhysicalMaterialParams.displacementMap = wildMapMisc
   MeshPhysicalMaterialParams.clearcoatNormalMap = wildMapMisc
   MeshPhysicalMaterialParams.sheenColorMap = wildMapMisc
