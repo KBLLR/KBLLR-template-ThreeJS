@@ -192,6 +192,27 @@ nav {
   text-align: center;
 }
 
+#input-bar {
+  position: fixed;
+  z-index: 100000;
+  display: flex;
+  flex-flow: nowrap row;
+  align-items: center;
+  align-content: space-between;
+  width: 92vw;
+  top:50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Robot-Medium';
+  font-size: 0.75rem;
+  color: hsla(0, 0%, 100%, 0.8);
+  background-color: hsla(0, 0%, 19%, 0.193);
+  border-radius:4px;
+}
+
+#generateButton {
+  font-size: 0.5rem;
+  padding: 0 2%;
+}
 #ui-col-title {
   font-family: 'pirulen';
   font-size: 1rem;

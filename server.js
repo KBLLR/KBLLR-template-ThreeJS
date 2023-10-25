@@ -1,8 +1,10 @@
 import express, { json } from 'express'
 const app = express()
-import routes from './routes'
+
+import routes from './routes.js'
 
 app.use(json())
+
 app.use('/api', routes)
 
 app.listen(3000, () => {

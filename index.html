@@ -39,18 +39,22 @@
     <h3 id="ui-title">DEMO-TITLE</h3>
   </div>
 
-  <!-- UI INPUTS -->
-  <div id="ui-bar-wraper">
-    <div class="left">
-      <button id="generateRandomWord">Random Inspiration</button>
-    </div>
-    <div class="middle">
-      <input type="text" id="inputWord" placeholder="Dare to dream">
-      <div id="suggestions"></div>
-    </div>
-    <div class="right">
-      <button id="sendWord">Send</button>
-    </div>
+  <!-- UI Prompt Input-->
+  <div id="input-bar">
+    <input type="text" id="promptInput" placeholder="Enter your prompt">
+    <label for="sizeSelect">#images</label>
+    <input type="number" id="numbImages" placeholder="#?">
+    <label for="imgRes">Size:</label>
+    <select title="select" name="dropdown" id="imgRes">
+      <option value="256x256">256x256</option>
+      <option value="512x512">512x512</option>
+      <option value="1024x1024">1024x1024</option>
+    </select>
+    <button id="generateButton">Generate</button>
+  </div>
+
+  <div>
+    <img id="generatedImage" alt="Generated" style="display:none;">
   </div>
 
   <!-- UI MENU -->

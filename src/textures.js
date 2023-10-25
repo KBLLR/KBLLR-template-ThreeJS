@@ -13,15 +13,16 @@ class TextureGenerator {
 
   async generateImage(prompt) {
     try {
-      const response = await axios.post('http://localhost:3000/image', { prompt: prompt });
+      const response = await axios.post('http://localhost:3000/api/create-image', { prompt: prompt });
       return response.data;
     } catch (error) {
       console.error('Error generating image:', error);
       return null;
     }
   }
+  
 
-  async g_texture(wildcard = "topic", repeat = 8) {  // Corrected repeat argument default value syntax
+  async g_texture(wildcard = "topic", repeat = 8) {  
     const textPrompt = wildcard === "topic" ? this.getRandomTopic() : wildcard;
     const imageURL = await this.generateImage(textPrompt);
     
@@ -33,20 +34,21 @@ class TextureGenerator {
     const preload = new THREE.TextureLoader().load(
       imageURL,
       (e) => {
-        e.mapping = THREE.EquirectangularRefractionMapping;
-        e.anisotropy = this.anisotropyLevel;
-        e.magFilter = THREE.NearestFilter;
-        e.minFilter = THREE.LinearMipmapLinearFilter;
-        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping;
-        e.type = THREE.HalfFloatType;
-        e.format = THREE.RGBAFormat;
-        e.repeat.set(repeat, repeat);
-        e.generateMipmaps = true;
-        e.needsUpdate = true;
+        e.colorEncoding = THREE.SRGBColorEncoding
+        e.mapping = THREE.EquirectangularRefractionMapping
+        e.anisotropy = this.anisotropyLevel
+        e.magFilter = THREE.NearestFilter
+        e.minFilter = THREE.LinearMipmapLinearFilter
+        e.wrapS = e.wrapT = THREE.MirroredRepeatWrapping
+        e.type = THREE.HalfFloatType
+        e.format = THREE.RGBAFormat
+        e.repeat.set(repeat, repeat)
+        e.generateMipmaps = true
+        e.needsUpdate = true
       }
     )
-    console.log(preload);
-    return preload;
+    console.log(preload)
+    return preload
   }
 }
 

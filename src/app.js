@@ -16,8 +16,6 @@ let paletteKey = getPaletteFromParams("blue")
 let palette = palettes[paletteKey]
 let sinPalette = sinPalettes[paletteKey]
 
-const textureGenerator = new TextureGenerator(); 
-
 
 ////////////////////////////////////////////////////////////////
 // ✧ MAIN CLASS - DEMO APP                                     /

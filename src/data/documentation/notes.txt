@@ -261,10 +261,19 @@ Low-poly models
 
 ***
 ------------------------------------------------------------------------------ ◉
-The Bidirectional Texture Function (BTF) is a data-driven solution to render materials with complex appearance. A typical capture contains tens of thousands of images of a material sample under varying viewing and lighting conditions. While capable of faithfully recording complex light interactions in the material, the main drawback is the massive memory requirement, both for storing and rendering, making effective compression of BTF data a critical component in practical applications.
+# HARDWARE / REQUIREMENTS / BENCHMARKING
+---
 
+# CPU BENCHMARKS
+- https://www.cpubenchmark.net/singleThread.html
+
+
+------------------------------------------------------------------------------ ◉
 # UNIFIED NEURAL ENCODING
 ---
+
+The Bidirectional Texture Function (BTF) is a data-driven solution to render materials with complex appearance. A typical capture contains tens of thousands of images of a material sample under varying viewing and lighting conditions. While capable of faithfully recording complex light interactions in the material, the main drawback is the massive memory requirement, both for storing and rendering, making effective compression of BTF data a critical component in practical applications.
+
 
 https://rgl.epfl.ch/publications/Rainer2020Unified
 https://reality.cs.ucl.ac.uk/projects/btf/rainer19neural.html
@@ -305,6 +314,9 @@ https://noemotionhdrs.net/hdrother.html
 
 ### ART - Advanced Rendering Toolkit
 - https://cgg.mff.cuni.cz/ART/
+
+### NVIDIA Developer Tools Overview
+- https://developer.nvidia.com/tools-overview-old
 
 ------------------------------------------------------------------------------ ◉
 # COLOR SPACE - COLOR MANAGEMENT - Linear sRGBA - sRGBA
@@ -400,7 +412,13 @@ Isotropic DataSEt - https://rgl.s3.eu-central-1.amazonaws.com/media/papers/Dupuy
 - https://discourse.threejs.org/t/three-js-bookshelf/2468
 
 ------------------------------------------------------------------------------ ◉
-# POINT CLOUDS / GAUSSIAN SPLATTING
+# SHADERS
+---
+
+
+
+------------------------------------------------------------------------------ ◉
+# POINT CLOUDS / GAUSSIAN SPLATTING / NERFS
 ---
 
 ### Real Time Radial Field Rendering
@@ -416,11 +434,37 @@ Isotropic DataSEt - https://rgl.s3.eu-central-1.amazonaws.com/media/papers/Dupuy
 ### P5 Demo HandTracking + Facial Landmarks
 https://editor.p5js.org/orrkislev/sketches/wwLqrnVDt
 
+### Kalidokit is the mocap calculator for Kalidoface powered by Tensorflow.js/Mediapipe.  
+It is open source and available for developers to create their own face and body tracking apps! 
+https://github.com/yeemachine/kalidokit
 
+# INSPIRATION
+---
+### Skyl - Technologist, interaction designer, new media art
+- https://skyl.fr/work
+
+### P5.js Showcase 2022
+- https://showcase.p5js.org/#/2022-All
+
+
+------------------------------------------------------------------------------ ◉
+# MODELS
+---
+
+### Swift Diffusers for Mac (native)
+- https://huggingface.co/blog/fast-mac-diffusers
+
+
+# RESPONSIBLE AI PRACTICES
+---
+- https://cloud.google.com/vertex-ai/docs/generative-ai/learn/responsible-ai
+- https://blog.google/technology/ai/a-shared-agenda-for-responsible-ai-progress/
+
+------------------------------------------------------------------------------ ◉
 # LIBRARIES
 ---
 
-### Animation Libraries:
+## Animation Libraries:
 -
 
 ### TheatreJS
@@ -429,10 +473,46 @@ https://www.theatrejs.com/
 ### Gsap
 https://greensock.com/gsap/
 
+### P5 Shaders
+- https://p5js.org/
+- https://itp-xstory.github.io/p5js-shaders/#/
+
+### ML5.org
+- https://ml5js.org/
+
+### Tetoki 
+- https://www.tetoki.eu/vida/blobs_demystified_static_background_camera.html
+
+### PYTHON
+
+### PyTorch edge ExecuTorch [INFERENCE small devices]
+- https://pytorch.org/blog/pytorch-edge/?utm_source=tldrai
+- https://ai.google/responsibility/responsible-ai-practices/
+
+### 3D vedo - A python module for scientific analysis and visualization of эd objects
+- https://vedo.embl.es/
+
+### NAPARI Visualizer
+-- https://napari.org/stable/gallery.html#gallery
+
+
+------------------------------------------------------------------------------ ◉
+# GRAPH THEORY / KNOWLEDGE GRAPHS
+---
+
+# INFRANODUS
+- https://infranodus.com/
+
+### Cytoscape.js, Graph theory (network) library for visualisation and analysis
+- https://js.cytoscape.org/
+
 
 ------------------------------------------------------------------------------ ◉
 # COURSES / TUTORIALS
 ---
+
+### A11y - Accessibility Project001
+- https://www.a11yproject.com/
 
 ### Physically Based Rendering 
 https://pbr-book.org/3ed-2018/contents
@@ -456,6 +536,18 @@ https://fpcv.cs.columbia.edu/Monographs
 ### Mitsuba 3 - Inverse Rendering Tutorials
 - https://mitsuba.readthedocs.io/en/stable/src/inverse_rendering_tutorials.html
 
+### Python Tutorials
+- https://www.python.org/
+- https://www.geeksforgeeks.org/python-programming-language/
+- https://www.w3schools.com/python/
+- https://www.tutorialspoint.com/python/index.htm
+
+### Synthetic Data Generation for Training Computer Vision Models
+- https://courses.nvidia.com/courses/course-v1:DLI+S-OV-10+V1/
+
+
+### Solving PDEs in Python - The FEniCS Tutorial Volume I
+- https://fenicsproject.org/pub/tutorial/html/._ftut1001.html
 
 ------------------------------------------------------------------------------ ◉
 # DATASETS
@@ -473,6 +565,13 @@ https://fpcv.cs.columbia.edu/Monographs
 ### Columbia Gaze Data Set
 - https://cave.cs.columbia.edu/repository/ColumbiaGazeDataSet
 
+### Chinook SQLite sample database (use with chat models when execute functions whose inputs are model-generated, and use this to implement an agent that can answer questions for us about a database.)
+- https://www.sqlitetutorial.net/sqlite-sample-database/
+
+### Fashion-MNIST
+- https://github.com/zalandoresearch/fashion-mnist
+
+
 ------------------------------------------------------------------------------ ◉
 # PROMPT ENGINERRING
 ---
@@ -483,11 +582,6 @@ https://fpcv.cs.columbia.edu/Monographs
 ### OpenAI Cookbook
 - https://beta.openai.com/docs/engines/cookbook
 
-### OpenAI API
-- https://beta.openai.com/docs/api-reference/introduction
-
-### OpenAI CLI
-- https://beta.openai.com/docs/api
 
 
 ------------------------------------------------------------------------------ ◉
@@ -524,9 +618,28 @@ https://fpcv.cs.columbia.edu/Monographs
 ### Chat GPT retrieval Plugin 
 - https://github.com/openai/chatgpt-retrieval-plugin
 
+### Axios - Promise based HTTP client 
+- https://github.com/axios/axios
+
 ------------------------------------------------------------------------------ ◉
 # APIS
 ---
 
+### Public APIS
+- https://github.com/public-apis/public-apis
+
 ### Material-X
 - https://materialx.org/docs/api/index.html
+
+### OpenAI API
+- https://beta.openai.com/docs/api-reference/
+
+### OpenAI CLI
+- https://beta.openai.com/docs/api
+
+### Microlink API
+- https://microlink.io/docs/api/parameters/
+- https://microlink.io/docs
+
+### Public graphs API
+- https://github.com/graphql-kit/graphql-apis
